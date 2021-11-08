@@ -1,0 +1,147 @@
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #C9C9C9;
+    letter-spacing: 0.3em;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
+
+/*Container*/
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/*Intro*/
+
+.intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    
+    background: url("../img/intro.png") center no-repeat;
+ background-size: cover;
+}
+
+.intro__inner {
+    width: 100%;
+    max-width: 880px;
+    margin: 0 auto;
+    
+    text-align: center;
+    
+
+}
+
+.intro__title {
+    color: #fff;
+    font-size: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.5;
+}
+
+
+.intro__suptitle {
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.intro__suptitle:after {
+    content: "";
+    display: block;
+    width: 150px;
+    height: 2px;
+    margin: 10px auto;
+    
+    background-color: #fff;
+}
+
+/*Header*/
+.header {
+    padding-top: 10px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.header__inner{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__logo {
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+}
+
+
+/*Nav*/
+.nav {
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+
+.nav__link {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 15px;
+    
+    color: #fff;
+    text-decoration: none;
+    
+    transition: color 0.2s linear;
+}
+
+.nav__link:hover {
+    color: #fce38a;
+}
+
+/*Button*/
+.button {
+    display: inline-block;
+    vertical-align: top;
+    padding: 10px 20px;
+    background-color: aquamarine;
+    
+    font-size: 20px;
+    font-weight: 600;
+    color: darkslategray;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 10px;
+    
+    transition: background 0.1s linear, color 0.1s linear;
+}
+
+.button:hover {
+    background-color: darkslategray;
+    color: aquamarine;
+}
