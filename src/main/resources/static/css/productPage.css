@@ -52,7 +52,7 @@ body {
     margin-left: 40px;
 }
 .filterIcon {
-    background-image:url("imgs/groupFilter.png");
+    background-image:url("../img/productPage/groupFilter.png");
     background-repeat: no-repeat;
     width:22px;
     height:22px;
@@ -71,7 +71,7 @@ body {
     text-align: left;
 }
 .filterVectorIcon {
-    background-image:url("imgs/vectorLeft.png");
+    background-image:url("../img/productPage/vectorLeft.png");
     background-repeat: no-repeat;
     width:22px;
     height:22px;
@@ -116,7 +116,7 @@ body {
     width: 320px;
 }
 .product .productArrow {
-    background-image:url("imgs/arrowRight.png");
+    background-image:url("../img/productPage/arrowRight.png");
     background-repeat: no-repeat;
     width:22px;
     height:18px;
@@ -125,7 +125,7 @@ body {
     margin-left: 10px;
 }
 .product .productLike {
-    background-image:url("imgs/heart.png");
+    background-image:url("../img/productPage/heart.png");
     background-repeat: no-repeat;
     width:22px;
     height:22px;
