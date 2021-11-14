@@ -263,6 +263,9 @@
 .rightButton {
     border-radius: 0 15px 15px 0;
 }
+.logOutButton {
+    border-radius: 15px;
+}
 
 .loginButton:before {
     animation: opacityFallbackOut .5s step-end forwards;
