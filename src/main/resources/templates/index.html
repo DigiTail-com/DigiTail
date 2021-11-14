@@ -24,8 +24,10 @@
                       <a class="nav__link" href="#">категории</a>
                       <a class="nav__link" href="#">поддержка</a>
 
-                      <button th:unless="${flag}" id="login">Login</button>
-                      <button th:unless="${flag}" id="register">Register</button>
+                      <span class="regLogButtons">
+                          <button th:unless="${flag}" id="login" class="loginButton leftButton" role="button"><span class="text">Login</span></button>
+                          <button th:unless="${flag}" id="register" class="loginButton rightButton" role="button"><span class="text">Register</span></button>
+                      </span>
 
                       <a href="" th:if="${flag}">[[${#httpServletRequest.remoteUser}]]</a>
 
