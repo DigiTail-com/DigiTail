@@ -29,10 +29,10 @@
                           <button th:unless="${flag}" id="register" class="loginButton rightButton" role="button"><span class="text">Register</span></button>
                       </span>
 
-                      <a href="" th:if="${flag}" class="loginButton logOutButton">[[${#httpServletRequest.remoteUser}]]</a>
+                      <a href="" th:if="${flag}">[[${#httpServletRequest.remoteUser}]]</a>
 
-                      <form th:action="@{/logout}" method="post" th:if="${flag}">
-                          <input type="submit" value="Sign Out" />
+                      <form style="display: inline-block" th:action="@{/logout}" method="post" th:if="${flag}">
+                          <input type="submit" value="Sign Out" class="loginButton logOutButton" />
                       </form>
 
                   </nav>

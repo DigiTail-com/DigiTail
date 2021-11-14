@@ -34,11 +34,6 @@ public class MainController {
         return "index";
     }
 
-//    @GetMapping("/registration")
-//    public String registration(Model model) {
-//        return "registration";
-//    }
-
     @PostMapping("/registration")
     public String addUser(User user) {
         var userFromDb = userServiceImpl.findUserByUsername(user.getUsername());
