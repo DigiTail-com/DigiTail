@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.util.Set;
 import java.util.UUID;
 
 @Controller
@@ -42,7 +43,7 @@ public class AddProductController {
     }
 
     @PostMapping("/addProduct")
-    public String addProduct(@RequestParam("file") MultipartFile file, @ModelAttribute("newProduct") @Valid Product product, @AuthenticationPrincipal User user) throws IOException {
+    public String addProduct(@RequestParam("file") Set<MultipartFile> files, @ModelAttribute("newProduct") @Valid Product product, @AuthenticationPrincipal User user) throws IOException {
 
         File uploadDir = new File(uploadPath);
 
@@ -50,21 +51,25 @@ public class AddProductController {
             uploadDir.mkdir();
         }
 
-        String uuidFile = UUID.randomUUID().toString();
-        String resultFilename = uuidFile + "." + file.getOriginalFilename();
+        for (var file:files) {
+            String uuidFile = UUID.randomUUID().toString();
+            String resultFilename = uuidFile + "." + file.getOriginalFilename();
 
-        file.transferTo(new File(uploadPath + "/" + resultFilename));
+            file.transferTo(new File(uploadPath + "/" + resultFilename));
 
-        product.setFileName(resultFilename);
+            product.setFileName(resultFilename);
 
-        var user1 = userRepo.findByUsername(user.getUsername());
+            var user1 = userRepo.findByUsername(user.getUsername());
 
 
-        product.setUser(user1);
-        user1.addProduct(product);
-        productRepo.save(product);
+            product.setUser(user1);
+            user1.addProduct(product);
+            productRepo.save(product);
 
-        userRepo.saveAndFlush(user1);
+            userRepo.saveAndFlush(user1);
+        }
+
+
 
         return null;
     }
