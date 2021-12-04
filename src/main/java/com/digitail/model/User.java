@@ -13,16 +13,33 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String username;
 
     private String password;
+
     private boolean active;
+
     private String email;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
+
+    @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
+    private Set<Product> products;
+
+    public void addProduct(Product product){
+        products.add(product);
+    }
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
 
     public String getEmail() {
         return email;
