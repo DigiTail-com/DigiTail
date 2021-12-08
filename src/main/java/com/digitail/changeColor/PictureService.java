@@ -3,6 +3,7 @@ package com.digitail.changeColor;
 import com.digitail.changeColor.layer.ColoredLayer;
 import com.digitail.changeColor.layer.Layer;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -11,14 +12,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Picture implements IPicture {
+@Service
+public class PictureService implements IPicture {
 
     private String name;
-    private static String path = "pictureColor";
+    private String path;
     private Layer[] layers;
     private int width;
     private int height;
     private int type = -1;
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
 
     /**
      * <p>Create colored, or layered, or both types of images
@@ -29,14 +39,11 @@ public class Picture implements IPicture {
      * If there is a need to create an image as single layer,
      * you still have to name file in this convention or
      * program won't find it.
-     * @param name name of an image file in pictures folder
+     *  name of an image file in pictures folder
      */
-    public Picture(String name) {
-        this.name = name;
-        CreateLayers();
-    }
 
-    private void CreateLayers() {
+    //Создает массив с layers
+    public void CreateLayers() {
         var dir = new File(path);
         if(!dir.isDirectory()) throw new IllegalStateException("Wrong path for directory." + dir.getPath());
 

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Categories</title>
-    <link rel="stylesheet" th:href="@{/css/productPage.css}">
     <meta charset="UTF-8">
+    <title>Categories</title>
+    <link  media="all" rel="stylesheet" th:href="@{/css/productPage.css}">
 </head>
 <body>
 <div class="categories">
@@ -42,33 +42,13 @@
             </div>
         </div>
         <div class="product">
-            <div class="productElement">
-                <div><img src="imgs/product1.png"></div>
-                <div class="arrowLike">Foggy<span class="productArrow"></span><span class="productLike"></span></div>
-                <div><span class="madeBy">от Abram</span></div>
+            <div th:each="product, iter : ${products} ">
+                <div class="productElement">
+                    <div><img th:src="${product.getFileName()}"></div>
+                    <div class="arrowLike" th:text="${product.getName()}"><span class="productArrow"></span><span class="productLike"></span></div>
+                    <div><span class="madeBy" th:text="${product.getUser().getUsername()}"></span></div>
+                </div>
             </div>
-            <div class="productElement">
-                <div><img src="imgs/product2.png"></div>
-                <div class="arrowLike">Morning<span class="productArrow"></span><span class="productLike"></span></div>
-                <div><div><span class="madeBy">от Roves</span></div></div>
-            </div>
-            <div class="productElement">
-                <div><img src="imgs/product3.png"></div>
-                <div class="arrowLike">Cyber City<span class="productArrow"></span><span class="productLike"></span></div>
-                <div><div><span class="madeBy">от Flexo</span></div></div>
-            </div>
-            <div class="productElement"></div>
-            <div class="productElement"></div>
-            <div class="productElement"></div>
-            <div class="productElement"></div>
-            <div class="productElement"></div>
-            <div class="productElement"></div>
-            <div class="productElement"></div>
-            <div class="productElement"></div>
-            <div class="productElement"></div>
-            <div class="productElement"></div>
-            <div class="productElement"></div>
-            <div class="productElement"></div>
         </div>
     </div>
 </div>
