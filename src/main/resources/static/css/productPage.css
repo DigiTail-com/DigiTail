@@ -112,8 +112,17 @@ body {
     height: 260px;
     overflow: hidden;
 }
+.product .productElement .imgDiv {
+    text-align: center;
+}
+
 .product .productElement img {
-    width: 320px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 320px;
+    max-height: 196px;
+    min-height: 196px;
 }
 .product .productArrow {
     background-image:url("../img/productPage/arrowRight.png");
