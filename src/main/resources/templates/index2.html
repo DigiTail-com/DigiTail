@@ -19,7 +19,7 @@
           <div class="header__inner">
           <div class="header__logo"><span class="letter">D</span>igi<span class="letter">T</span>ail</div>
               <nav class="nav">
-                <a class="nav__link" href="#">главная</a>
+                <a class="nav__link" th:href="@{/}">главная</a>
                 <a class="nav__link" href="#">категории</a>
                 <a class="nav__link" href="#">поддержка</a>
 
@@ -266,7 +266,7 @@
                     <div class="join__block">
                         <img class="join__img" th:src="@{/public/img/main_page/user2.png}" width="190" height="190">
                     </div>
-                      <a class="button2" href="#">Создать</a>
+                      <a  th:unless="${flag}" id="register_two" class="button2" role="button"href="#">Создать</a>
                       <div class="join__info">Получи возможность покупать и продавать цифровые товары прямо сейчас !</div>
                   </div>
               </div>
@@ -368,6 +368,11 @@
           document.querySelector(".login-box").style.display = "none";
       };
       document.querySelector("#register").onclick = () => {
+          document.querySelector(".reg-box").style.display = "block";
+          document.querySelector(".login-box").style.display = "none";
+      }
+
+      document.querySelector("#register_two").onclick = () => {
           document.querySelector(".reg-box").style.display = "block";
           document.querySelector(".login-box").style.display = "none";
       }
