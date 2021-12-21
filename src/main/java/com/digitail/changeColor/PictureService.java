@@ -54,7 +54,7 @@ public class PictureService {
         for(File file : files) {
             Layer layer = null;
 
-            if(file.getName().contains("_c.")) {
+            if(file.getName().contains("c.")) {
                 layer = new ColoredLayer(file);
             }
             else if (file.getName().contains("_"))
