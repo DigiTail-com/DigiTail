@@ -1,0 +1,312 @@
+body {
+    margin: 0;
+}
+
+.accountReductPage {
+    font-family: Arial;
+    font-style: normal;
+}
+
+.mainAccountInfo {
+    padding-top: 0;
+    background-color: #f5f5f5;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.accountInfoAndImg {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0;
+    margin-right: 260px;
+}
+
+.avatarImg {
+    margin-top: 15px;
+    margin-right: 15px;
+}
+
+.accountInfo {
+    letter-spacing: 0.05em;
+    text-align: center;
+    color: #333334;
+}
+
+.accountInfo p:nth-child(1) {
+    margin-bottom: 0;
+    font-size: 36px;
+    line-height: 49px;
+}
+
+.accountInfo p:nth-child(2), p:nth-child(3) {
+    margin: 0;
+    font-size: 24px;
+    line-height: 33px;
+}
+
+.moneyMade {
+    margin-top: 15px;
+    margin-right: 60px;
+}
+
+.moneyMadeMoney {
+    width: 294px;
+    height: 122px;
+    text-align: center;
+    background-color: #485D46;
+    color: white;
+    border-radius: 15px;
+}
+
+.moneyMadeMoney p {
+    font-weight: 500;
+    letter-spacing: 0.05em;
+}
+
+.moneyMadeMoney p:nth-child(1) {
+    font-size: 20px;
+    line-height: 27px;
+    margin-bottom: 10px;
+}
+
+.moneyMadeMoney p:nth-child(2) {
+    margin-bottom: 0;
+    margin-top: 0;
+    font-size: 48px;
+    line-height: 66px;
+}
+
+.moneyMadeWithdraw {
+    margin: 0;
+    padding: 0;
+}
+
+.moneyMadeWithdraw span {
+    color: #CBCBCB;
+}
+
+.moneyMadeWithdraw button {
+    float: right;
+    font-size: 13px;
+    line-height: 18px;
+    color: #5F5F5F;
+    border: none;
+    background-color: #f5f5f5
+}
+
+.yourBalance {
+    margin-top: 36px;
+    text-align: center;
+    width: 294px;
+    height: 122px;
+    background-color: #DBDBDB;
+    color: black;
+    border-radius: 15px;
+}
+
+.yourBalance p {
+    font-weight: 500;
+    letter-spacing: 0.05em;
+}
+
+.yourBalance .plus {
+    margin-left: 10px;
+    display: inline-block;
+    position: relative;
+    width: 34px;
+    height: 34px;
+    background: #b2b2b2;
+    border-radius: 60px;
+}
+
+.plus:before,
+.plus:after {
+    content: "";
+    position: absolute;
+    background: #fff;
+}
+
+.plus:before {
+    left: 50%;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    transform: translateX(-50%);
+}
+
+.plus:after {
+    top: 50%;
+    left: 8px;
+    right: 8px;
+    height: 2px;
+    transform: translateY(-50%);
+}
+
+.yourBalance p:nth-child(1) {
+    margin-top: 0;
+    font-size: 20px;
+    line-height: 27px;
+    margin-bottom: 10px;
+}
+
+.yourBalance p:nth-child(2) {
+    margin-bottom: 0;
+    margin-top: 0;
+    font-size: 48px;
+    line-height: 66px;
+}
+
+.addAvatarButton {
+    padding-top: 0;
+    background-color: #f5f5f5;
+}
+
+.addAvatarButton input {
+    background-color: #f5f5f5;
+    margin-top: 6px;
+    border: none;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 33px;
+    color: #000000;
+}
+
+.accountMenu {
+    margin: auto;
+    padding-top: 0;
+    background-color: #f5f5f5;
+}
+
+.accountMenu ul {
+    margin: 0;
+    padding: 92px 0 0 0;
+    list-style: none;
+    font-size: 0;
+    line-height: 41px;
+    color: #000000;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.accountMenu li {
+    font-size: 25px;
+    padding: 11px 30px;
+    margin: 0;
+}
+
+.selectedLi {
+    background-color: #e2e2e2;
+}
+
+.tableNote table,.tableNote td {
+    border: 1px solid #CFCFCF;
+    border-collapse: collapse;
+}
+
+.tableNote table {
+    width: 1200px;
+    margin-top: 45px;
+    border: 1px solid #CFCFCF;
+    background: #FBF9F9;
+    padding: 17px 33px 25px 33px;
+}
+
+.tableNote th {
+    padding: 17px 33px;
+    float: left;
+    font-size: 36px;
+    line-height: 49px;
+    color: #000000;
+}
+
+.tableNote td {
+    padding: 17px 33px;
+    font-size: 28px;
+    line-height: 41px;
+    color: #000000;
+}
+
+.tableNote p {
+    margin-top: 0;
+    margin-bottom: 14px;
+}
+
+.tableNote input {
+    font-size: 28px;
+    line-height: 41px;
+    color: #3583B0;
+    background: none;
+    border: none;
+    padding-left: 10px;
+}
+
+.informationTable table,.informationTable .separatorOnTop {
+    border-top: 1px solid #CFCFCF;
+    border-collapse: collapse;
+}
+
+.informationTable table,.informationTable .separatorOnBottom {
+    border-bottom: 1px solid #CFCFCF;
+    border-collapse: collapse;
+}
+
+.informationTable table {
+    width: 1200px;
+    margin-top: 45px;
+    border: 1px solid #CFCFCF;
+    background: #FBF9F9;
+    padding: 17px 33px 25px 33px;
+}
+
+.informationTable tr {
+    padding: 18px 0;
+}
+
+.informationTable th {
+    padding: 17px 33px;
+    float: left;
+    font-size: 36px;
+    line-height: 49px;
+    color: #000000;
+}
+
+.informationTable td {
+    padding: 17px 33px;
+    font-size: 28px;
+    line-height: 41px;
+    color: #000000;
+}
+
+.informationTable td input {
+    width: 820px;
+    height: 55px;
+    background: #FFFFFF;
+    border: 1px solid #BBBBBB;
+    box-sizing: border-box;
+    border-radius: 15px;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 41px;
+    color: #000000;
+    padding-left: 8px;
+}
+
+.informationTable span {
+    display: inline-block;
+    width: 240px;
+    margin-top: 0;
+    margin-bottom: 14px;
+}
+
+.informationTable .saveButton {
+    float: right;
+}
+
+.informationTable .saveButton input {
+    color: white;
+    background: #485D46;
+    border-radius: 15px;
+    width: 200px;
+}

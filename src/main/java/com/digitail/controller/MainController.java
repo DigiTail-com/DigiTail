@@ -8,12 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
 import java.util.Collections;
 
 @Controller
+@RequestMapping("/")
 public class MainController {
 
     private UserRepo userRepo;
@@ -27,18 +32,27 @@ public class MainController {
 
     @GetMapping()
     public String index(@AuthenticationPrincipal User user, Model model){
-        if (user == null)
+        if (user == null) {
             model.addAttribute("flag", false);
-        else model.addAttribute("flag", true);
+            model.addAttribute("user", new User());
+        }
+        else {
+            model.addAttribute("flag", true);
+            model.addAttribute("user", user);
+        }
 
-        return "index";
+        return "index2";
     }
 
     @PostMapping("/registration")
-    public String addUser(User user) {
+    public String addUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         var userFromDb = userServiceImpl.findUserByUsername(user.getUsername());
 
         if (userFromDb != null) {
+            return "redirect:/";
+        }
+
+        if (bindingResult.hasErrors()){
             return "redirect:/";
         }
 
