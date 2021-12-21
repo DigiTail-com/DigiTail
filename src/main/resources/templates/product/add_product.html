@@ -1,10 +1,15 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>AccountReduct</title>
+    <link rel="stylesheet" href="Frame5Page.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+    <link media="all" type="text/css" rel="stylesheet" th:href="@{/public/css/add_product_style.css}"/>
     <meta charset="UTF-8">
-    <link media="all" type="text/css" rel="stylesheet" th:href="@{/public/css/personal_area.css}"/>
 </head>
 <body>
 <header class="header">
@@ -37,101 +42,59 @@
     <a href="#">Wordpress</a>
     <a href="#">Скрипты</a>
 </div>
-<div class="accountReductPage">
-    <div class="accountTopDiv">
-        <div class="mainAccountInfo">
-            <div class="accountInfoAndImg">
-                <img th:src="@{/public/img/user/user_1.png}" alt="Avatar" class="avatarImg">
-                <div class="accountInfo" th:object="${user}" >
-                    <p class="accountInfoName" th:value="*{username}" th:text="*{username}"></p>
-                    <p class="accountInfoEmail" th:value="*{email}" th:text="*{email}"></p>
-                    <p class="accountInfoId" th:value="*{id}" th:text="*{id}"></p>
+<div class="mainDiv">
+    <form class="menuDiv" method="post" th:action="@{/product/addProduct}" enctype="multipart/form-data" th:object="${product}">
+        <p class="menuDivP" >Добавление товара на торговую площадку</p>
+        <div class="menuDivFlexBox">
+            <div>
+                <div class="menuDivSelectDiv">
+                    <label>
+                        <select>
+                            <option selected>выберите категорию товара</option>
+                            <option>Категория 1</option>
+                            <option>Категория 2</option>
+                        </select>
+                    </label>
                 </div>
+<!--                <div class="menuDivInputDiv">-->
+<!--                    <input type="text" placeholder="кто будет чаще видеть ваш товар..."/>-->
+<!--                </div>-->
+                <!--<div class="menuDivSelectDiv">
+                    <label>
+                        <select>
+                            <option selected>стадия готовности продукта</option>
+                            <option>Категория 1</option>
+                            <option>Категория 2</option>
+                        </select>
+                    </label>
+                </div>-->
+                <div class="menuDivPriceDiv">
+                    <input type="text" placeholder="ваша цена..." th:field="*{price}"/>
+                    <input type="text" placeholder="итоговая цена..."/>
+                    <span class="underSpanPrice">*с учётом комиссии</span>
+                </div>
+                <!--<div class="menuDivUploadDiv">
+                    <span class="plus"></span>-->
+                    <input type="file" name="file" class="form-control-file" multiple>
+                    <!--<span class="underSpanUpload">*максимальный размер 1 гб</span>
+                </div>-->
             </div>
-            <div class="moneyMade">
-                <div class="moneyMadeMoney">
-                    <p>Заработано:</p>
-                    <p>1431.43$</p>
+            <div>
+                <div class="enterTitleDiv"><textarea type="text" placeholder="Введите название..." th:field="*{name}"></textarea></div>
+                <div class="enterDescriptionDiv"><textarea type="text" placeholder="Описание товара..." th:field="*{description}"></textarea>
                 </div>
-                <div class="moneyMadeWithdraw">
-                    <span>*без учёта комиссии</span>
-                    <button>снять ></button>
-                </div>
-            </div>
-            <div class="yourBalance">
-                <div>
-                    <p>Ваш баланс:</p>
-                    <p>418$<span class="plus"></span></p>
+                <div class="addPhotoDiv">
+                    <input type="button" value="добавьте фото">
+                    <span class="plus"></span>
                 </div>
             </div>
         </div>
-        <div class="addAvatarButton">
-            <input type="button" value="+Добавить аватар">
+        <div class="saveButtonDiv">
+            <input type="submit" value="Сохранить">
         </div>
-        <div class="accountMenu">
-            <ul>
-                <li class="selectedLi">Аккаунт</li>
-                <li>Продажи</li>
-                <li>Избранное</li>
-                <li>Подписчики</li>
-                <li>Подписки</li>
-                <li>Покупки</li>
-                <li><a th:href="@{/product/addProduct}" style="text-decoration: none; color: black;">Добавить товар</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="tableNote">
-        <table>
-            <tr>
-                <th>Примечание</th>
-            </tr>
-            <tr>
-                <td><p>Мы не продаем и не распростаняем детали вашего аккаунта без вашего разрешения </p>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="informationTable">
-        <form th:action="@{/user/editPerson}" method="post" th:object="${user}">
-            <table>
-                <tr>
-                    <th>Информация</th>
-                </tr>
-                <tr>
-                    <div style="color: red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"/>
-                    <td class="separatorOnTop">
-                        <span>Имя</span>
-                        <input type="text" th:field="*{firstName}">
-                    </td>
-                </tr>
-                <tr>
-                    <div style="color: red" th:if="${#fields.hasErrors('secondName')}" th:errors="*{secondName}"/>
-                    <td>
-                        <span>Фамилия</span>
-                        <input type="text" th:field="*{secondName}">
-                    </td>
-                </tr>
-                <tr>
-                    <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"/>
-                    <td>
-                        <span>Email</span>
-                        <input type="text" placeholder="*Если вы хотите продавать от лица компании" th:field="*{email}">
-                    </td>
-                </tr>
-                <tr>
-                    <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"/>
-                    <td>
-                        <span>Поменять пароль</span>
-                        <input type="text" th:field="*{password}">
-                    </td>
-                </tr>
-                <tr class="saveButton">
-                    <td><input type="submit" value="Сохранить"></td>
-                </tr>
-            </table>
-        </form>
-    </div>
+    </form>
 </div>
+
 <section class="section3">
     <div class="container__foot">
         <div class="foot__header">

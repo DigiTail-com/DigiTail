@@ -50,9 +50,12 @@ public class AddProductController {
 
     @GetMapping("/addProduct")
     public String addProduct(@AuthenticationPrincipal User user, Model model){
-        model.addAttribute("newProduct", new Product());
+        if (user == null)
+            return "redirect:/";
+        model.addAttribute("product", new Product());
+//        model.addAttribute("user", user);
 
-        return "addProduct";
+        return "product/add_product";
     }
 
     @PostMapping("/addProduct")
