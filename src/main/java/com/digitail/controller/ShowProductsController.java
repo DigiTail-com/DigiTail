@@ -2,6 +2,7 @@ package com.digitail.controller;
 
 import com.digitail.changeColor.PictureService;
 import com.digitail.model.Category;
+import com.digitail.model.Status;
 import com.digitail.model.User;
 import com.digitail.repos.ProductRepo;
 import com.digitail.repos.UserRepo;
@@ -51,7 +52,8 @@ public class ShowProductsController {
     public String showProduct(Model model, @AuthenticationPrincipal User user){
         if (user == null)
             return "redirect:/";
-        var products = productRepo.findAllByCategoryEquals(Category.PICTURE_COLOR);
+        var products = productRepo.findAllByCategoryEqualsAndStatusEquals(Category.PICTURE_COLOR, Status.APPROVED);
+
         model.addAttribute("products", products);
         return "product/show_products";
     }
