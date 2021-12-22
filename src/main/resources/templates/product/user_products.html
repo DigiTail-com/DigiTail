@@ -13,8 +13,8 @@
             <div class="header__inner">
                 <div class="header__logo"><span class="letter">D</span>igi<span class="letter">T</span>ail</div>
                 <nav class="nav">
-                    <a class="nav__link" href="#">главная</a>
-                    <a class="nav__link" href="#">категории</a>
+                    <a class="nav__link" th:href="@{/}">главная</a>
+                    <a class="nav__link" th:href="@{/product/showProducts}">категории</a>
                     <a class="nav__link" href="#">поддержка</a>
                     <a class="nav__img" th:href="@{/user}">
                         <img th:src="@{/public/img/main_page/user2.png}" width="20" height="20">
@@ -30,35 +30,29 @@
 
 
     <div class="categories">
-        <div class="prewq">
-
-            <div class="product">
-                <div class="productElement">
-                    <div class="imgDiv"><img src="imgs/product1.png"></div>
-                    <div class="arrowLike">Foggy<span class="productArrow"></span><span class="productLike"></span>
-                    </div>
-                    <div><span class="madeBy">от Abram</span></div>
-                </div>
-
-                <div class="productElement">
-                    <div class="imgDiv"><img src="imgs/product1.png"></div>
-                    <div class="arrowLike">Foggy<span class="productArrow"></span><span class="productLike"></span>
-                    </div>
-                    <div><span class="madeBy">от Abram</span></div>
-                </div>
-
-                <div class="productElement">
-                    <div class="imgDiv"><img src="imgs/product1.png"></div>
-                    <div class="arrowLike">Foggy<span class="productArrow"></span><span class="productLike"></span>
-                    </div>
-                    <div><span class="madeBy">от Abram</span></div>
-                </div>
-
+        <div class="productAndFilter">
+            <!--<div class="product">
                 <div class="productElement" style="display: flex; flex-direction: row; align-items: center; justify-content: center; background-color: #3d3d3d; color: white">
+                <div class="arrowLike">Добавить<span class="productArrow"></span><span class="productLike"></span>
+                </div>
+                </div>
+            </div>-->
+
+
+            <div class="product" >
+
+                <a th:href="@{/product/addProduct}" class="productElement" style="display: flex; flex-direction: row; align-items: center; justify-content: center; background-color: #3d3d3d; color: white">
                     <div class="arrowLike">Добавить<span class="productArrow"></span><span class="productLike"></span>
                     </div>
-                </div>
+                </a>
+
+                <a th:each="product, iter : ${products}" th:href="@{/user/showProduct/{id}(id = ${product.getId()})}" class="productElement">
+                    <div class="imgDiv"><img th:src="${product.getPath()}"></div>
+                    <div class="arrowLike" th:text="${product.getName()}"><span class="productArrow"></span><span class="productLike"></span></div>
+                    <div><span class="madeBy" th:text="${product.getUser().getUsername()}"></span></div>
+                </a>
             </div>
+
         </div>
     </div>
 </section>

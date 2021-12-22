@@ -1,6 +1,9 @@
 package com.digitail.controller;
 
+import com.digitail.model.Product;
+import com.digitail.model.Status;
 import com.digitail.model.User;
+import com.digitail.repos.ProductRepo;
 import com.digitail.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -16,10 +19,12 @@ import javax.validation.Valid;
 public class personalAreaController {
 
     private UserService userService;
+    private ProductRepo productRepo;
 
     @Autowired
-    public personalAreaController(UserService userService) {
+    public personalAreaController(UserService userService, ProductRepo productRepo) {
         this.userService = userService;
+        this.productRepo = productRepo;
     }
 
     @GetMapping("")
@@ -46,7 +51,31 @@ public class personalAreaController {
     }
 
     @GetMapping("/products")
-    public String showUserProducts(){
+    public String showUserProducts(@AuthenticationPrincipal User user, Model model){
+        var products = productRepo.findAllByUser(user);
+        model.addAttribute("products", products);
         return "product/user_products";
+    }
+
+    @GetMapping("/showProduct/{id}")
+    public String showUserProduct(@PathVariable long id, @AuthenticationPrincipal User user, Model model){
+        model.addAttribute("product", productRepo.findById(id));
+        return "product/user_product_page";
+    }
+
+    @PostMapping("/editProduct/{id}")
+    public String editUserProduct(@PathVariable long id,
+                                  @ModelAttribute("product") @Valid Product product,
+                                  @AuthenticationPrincipal User user){
+        var productFromDB = productRepo.findById(id);
+        productFromDB.setStatus(Status.AWAITING);
+        productFromDB.setName(product.getName());
+        productFromDB.setDescription(product.getDescription());
+        productFromDB.setPrice(product.getPrice());
+        productFromDB.setCategory(product.getCategory());
+
+        productRepo.save(productFromDB);
+
+        return "redirect:/user/showProduct/" + id;
     }
 }

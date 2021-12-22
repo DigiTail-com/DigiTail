@@ -111,11 +111,6 @@ body {
     grid-template-areas:"n c";
 }
 
-.prewq{
-    padding-top: 40px;
-    display: grid;
-}
-
 .sideFilter {
     grid-area: n;
     background-color: #3d3d3d;

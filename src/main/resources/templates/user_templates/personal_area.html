@@ -13,7 +13,7 @@
             <div class="header__logo"><span class="letter">D</span>igi<span class="letter">T</span>ail</div>
             <nav class="nav">
                 <a class="nav__link" th:href="@{/}">главная</a>
-                <a class="nav__link" href="#">категории</a>
+                <a class="nav__link" th:href="@{/product/showProducts}">категории</a>
                 <a class="nav__link" href="#">поддержка</a>
                 <a class="nav__img" th:href="@{/user}">
                     <img th:src="@{/public/img/main_page/user2.png}" width="20" height="20">
@@ -76,7 +76,7 @@
                 <li>Подписчики</li>
                 <li>Подписки</li>
                 <li>Покупки</li>
-                <li><a th:href="@{/product/addProduct}" style="text-decoration: none; color: black;">Добавить товар</a></li>
+                <li><a th:href="@{/user/products}" style="text-decoration: none; color: black;">Ваши товары</a></li>
             </ul>
         </div>
     </div>

@@ -3,6 +3,7 @@ package com.digitail.controller;
 import com.digitail.changeColor.PictureService;
 import com.digitail.model.Category;
 import com.digitail.model.Product;
+import com.digitail.model.Status;
 import com.digitail.model.User;
 import com.digitail.repos.ProductRepo;
 import com.digitail.repos.UserRepo;
@@ -93,6 +94,7 @@ public class AddProductController {
         product.setPath("/uploads/pictureColor/default" + "/" + uuidFile + ".png");
 //        product.setName(product.getName());
         product.setUser(user);
+        product.setStatus(Status.AWAITING);
         user.addProduct(product);
         productRepo.save(product);
         userRepo.saveAndFlush(user);

@@ -13,8 +13,8 @@
             <div class="header__inner">
                 <div class="header__logo"><span class="letter">D</span>igi<span class="letter">T</span>ail</div>
                 <nav class="nav">
-                    <a class="nav__link" href="#">главная</a>
-                    <a class="nav__link" href="#">категории</a>
+                    <a class="nav__link" th:href="@{/}">главная</a>
+                    <a class="nav__link" th:href="@{/product/showProducts}">категории</a>
                     <a class="nav__link" href="#">поддержка</a>
                     <a class="nav__img" th:href="@{/user}">
                         <img th:src="@{/public/img/main_page/user2.png}" width="20" height="20">
@@ -64,13 +64,11 @@
                 </div>
             </div>
             <div class="product">
-                <div th:each="product, iter : ${products} ">
-                    <a th:href="@{/product/showProducts/{id}(id = ${product.getId()})}" class="productElement">
-                        <div class="imgDiv"><img th:src="${product.getPath()}"></div>
-                        <div class="arrowLike" th:text="${product.getName()}"><span class="productArrow"></span><span class="productLike"></span></div>
-                        <div><span class="madeBy" th:text="${product.getUser().getUsername()}"></span></div>
-                    </a>
-                </div>
+                <a th:each="product, iter : ${products} " th:href="@{/product/showProducts/{id}(id = ${product.getId()})}" class="productElement">
+                    <div class="imgDiv"><img th:src="${product.getPath()}"></div>
+                    <div class="arrowLike" th:text="${product.getName()}"><span class="productArrow"></span><span class="productLike"></span></div>
+                    <div><span class="madeBy" th:text="${product.getUser().getUsername()}"></span></div>
+                </a>
             </div>
         </div>
     </div>
