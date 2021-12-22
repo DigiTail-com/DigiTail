@@ -2,6 +2,7 @@ package com.digitail.controller;
 
 import com.digitail.changeColor.PictureService;
 import com.digitail.model.Category;
+import com.digitail.model.User;
 import com.digitail.repos.ProductRepo;
 import com.digitail.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,11 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.File;
@@ -45,16 +48,28 @@ public class ShowProductsController {
     }
 
     @GetMapping("/showProducts")
-    public String showProduct(Model model){
+    public String showProduct(Model model, @AuthenticationPrincipal User user){
+        if (user == null)
+            return "redirect:/";
         var products = productRepo.findAllByCategoryEquals(Category.PICTURE_COLOR);
         model.addAttribute("products", products);
         return "product/show_products";
     }
 
-    @GetMapping("/download")
-    public ResponseEntity<Object> downloadFile() throws FileNotFoundException {
-        String fileName = "/Users/daniil/Desktop/DigiTail/src/main/resources/static/uploads/pictureColor/default/7b57192b-b13e-4518-81d1-21a5a76b2976.png";
-        var file = new File(fileName);
+    @GetMapping("/showProducts/{id}")
+    public String showProduct(@PathVariable("id") long id, Model model, @AuthenticationPrincipal User user){
+        if (user == null)
+            return "redirect:/";
+
+        model.addAttribute("product", productRepo.findById(id));
+        return "product/product_page";
+    }
+
+    @GetMapping("/download/{id}")
+    public ResponseEntity<Object> downloadFile(@PathVariable("id") long id, @AuthenticationPrincipal User user) throws FileNotFoundException {
+        var product = productRepo.findById(id);
+        String fileName = product.getPath();
+        var file = new File("src/main/resources/static/" + fileName);
         var resources = new InputStreamResource(new FileInputStream(file));
         var headers = new HttpHeaders();
         headers.add("Content-Disposition",

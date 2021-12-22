@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>productOneMorning</title>
-    <link rel="stylesheet" href="ProductOne.css">
+    <link  media="all" rel="stylesheet" th:href="@{/public/css/product_page.css}">
     <meta charset="UTF-8">
 </head>
 <body>
@@ -14,9 +15,12 @@
                 <a class="nav__link" href="#">главная</a>
                 <a class="nav__link" href="#">категории</a>
                 <a class="nav__link" href="#">поддержка</a>
-                <div class="nav__img">
-                    <img src="./imgs/user2.png" width="20" height="20">
-                </div>
+                <a class="nav__img" th:href="@{/user}">
+                    <img th:src="@{/public/img/main_page/user2.png}" width="20" height="20">
+                </a>
+                <form style="display: inline-block" th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sign Out" class="loginButton logOutButton" />
+                </form>
 
             </nav>
         </div>
@@ -35,24 +39,25 @@
 </div>
 <div class="productOneMorning">
     <div class="mainProduct">
-        <img src="imgs/mainProduct.png" class="mainProdImg">
-        <div class="mainProdInfo">
+        <img th:src="${product.getPath()}" class="mainProdImg">
+        <div class="mainProdInfo" style="max-width: 400px;">
             <div class="mainProdInfoDiv">
-                <h1>"Morning"<span>by Roves</span></h1>
+                <h1 >"Morning"<span>by Roves</span></h1>
                 <ul>
                     <li>Авторский арт</li>
                     <li>3840x2160 16:9</li>
                     <li>Доступен в Simply</li>
                 </ul>
             </div>
-            <div class="mainProdInfoButtonDiv">
-                <input class="mainProdButton" type="button" value="1.99$">
-            </div>
+            <form class="mainProdInfoButtonDiv" method="get" th:action="@{/product/download/{id}(id = ${product.getId()})}">
+                <button class="mainProdButton" type="submit" th:text="${product.getPrice() + '$'}" >
+                </button>
+            </form>
         </div>
     </div>
     <h1 class="sectionName prodDescription">Описание:</h1>
     <div class="mainProdDescription">
-        <p class="mainProdDescriptionP prodDescription">Lorem ipsum dolor sit amet, consectetuer adipiscing
+        <p class="mainProdDescriptionP prodDescription" th:text="${product.getDescription()}">Lorem ipsum dolor sit amet, consectetuer adipiscing
             elit. Aenean commodo
             ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur
             ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat

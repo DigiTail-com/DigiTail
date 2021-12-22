@@ -49,11 +49,16 @@
             <div>
                 <div class="menuDivSelectDiv">
                     <label>
-                        <select>
-                            <option selected>выберите категорию товара</option>
-                            <option>Категория 1</option>
-                            <option>Категория 2</option>
+
+                        <select name="status" id="roles" th:field="*{category}">
+                            <option th:each="category : ${T(com.digitail.model.Category).values()}"
+                                    th:value="${category}" th:text="${category.getCommand()}" ></option>
                         </select>
+<!--                        <select>-->
+<!--                            <option selected>выберите категорию товара</option>-->
+<!--                            <option>Категория 1</option>-->
+<!--                            <option>Категория 2</option>-->
+<!--                        </select>-->
                     </label>
                 </div>
 <!--                <div class="menuDivInputDiv">-->

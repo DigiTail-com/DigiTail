@@ -12,5 +12,6 @@ import java.util.Set;
 public interface ProductRepo extends CrudRepository<Product, Long> {
     Set<Product> findAllByUser(User user);
     Set<Product> findAllByCategoryEquals(Category category);
+    Product findById(long id);
 }
 

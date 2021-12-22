@@ -92,7 +92,6 @@ public class AddProductController {
         product.setFileName(uuidFile);
         product.setPath("/uploads/pictureColor/default" + "/" + uuidFile + ".png");
 //        product.setName(product.getName());
-        product.setCategory(Category.PICTURE_COLOR);
         product.setUser(user);
         user.addProduct(product);
         productRepo.save(product);

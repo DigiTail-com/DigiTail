@@ -16,9 +16,12 @@
                     <a class="nav__link" href="#">главная</a>
                     <a class="nav__link" href="#">категории</a>
                     <a class="nav__link" href="#">поддержка</a>
-                    <div class="nav__img">
+                    <a class="nav__img" th:href="@{/user}">
                         <img th:src="@{/public/img/main_page/user2.png}" width="20" height="20">
-                    </div>
+                    </a>
+                    <form style="display: inline-block" th:action="@{/logout}" method="post">
+                        <input type="submit" value="Sign Out" class="loginButton logOutButton" />
+                    </form>
 
                 </nav>
             </div>
@@ -62,11 +65,11 @@
             </div>
             <div class="product">
                 <div th:each="product, iter : ${products} ">
-                    <div class="productElement">
+                    <a th:href="@{/product/showProducts/{id}(id = ${product.getId()})}" class="productElement">
                         <div class="imgDiv"><img th:src="${product.getPath()}"></div>
                         <div class="arrowLike" th:text="${product.getName()}"><span class="productArrow"></span><span class="productLike"></span></div>
                         <div><span class="madeBy" th:text="${product.getUser().getUsername()}"></span></div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
