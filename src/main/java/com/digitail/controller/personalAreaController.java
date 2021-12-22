@@ -44,4 +44,9 @@ public class personalAreaController {
         userService.editUser(userAuth, user);
         return "redirect:/user";
     }
+
+    @GetMapping("/products")
+    public String showUserProducts(){
+        return "product/user_products";
+    }
 }
