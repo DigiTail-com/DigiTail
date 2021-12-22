@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Categories</title>
+    <link  media="all" rel="stylesheet" th:href="@{/public/css/show_products.css}">
+    <meta charset="UTF-8">
+</head>
+<body>
+<section class="mainSection">
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <div class="header__logo"><span class="letter">D</span>igi<span class="letter">T</span>ail</div>
+                <nav class="nav">
+                    <a class="nav__link" href="#">главная</a>
+                    <a class="nav__link" href="#">категории</a>
+                    <a class="nav__link" href="#">поддержка</a>
+                    <div class="nav__img">
+                        <img th:src="@{/public/img/main_page/user2.png}" width="20" height="20">
+                    </div>
+
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div class="topnav">
+        <a href="#">Арты</a>
+        <a href="#">3d-модели</a>
+        <a href="#">GameDev</a>
+        <a href="#">Темы</a>
+        <a href="#">Презентации</a>
+        <a href="#">Сайты</a>
+        <a href="#">Шаблоны</a>
+        <a href="#">Wordpress</a>
+        <a href="#">Скрипты</a>
+    </div>
+    <div class="categories">
+        <div class="productAndFilter">
+            <div class="sideFilter">
+                <button class="filterButton"><span class="filterIcon"></span>фильтр<span
+                        class="filterVectorIcon"></span>
+                </button>
+                <div class="filterSort">
+                    <div>
+                        <p>Сортировать по:</p>
+                        <button>популярности</button>
+                    </div>
+                    <div>
+                        <p>Автор:</p>
+                        <button>все</button>
+                    </div>
+                    <div>
+                        <p>Тема:</p>
+                        <button>все</button>
+                    </div>
+                    <div>
+                        <p>Размер:</p>
+                        <button>любой</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product">
+                <div th:each="product, iter : ${products} ">
+                    <div class="productElement">
+                        <div class="imgDiv"><img th:src="${product.getPath()}"></div>
+                        <div class="arrowLike" th:text="${product.getName()}"><span class="productArrow"></span><span class="productLike"></span></div>
+                        <div><span class="madeBy" th:text="${product.getUser().getUsername()}"></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section3">
+    <div class="container__foot">
+        <div class="foot__header">
+            <div class="foot__title">Категории товаров</div>
+            <div class="foot__title">О DigiTail</div>
+            <div class="foot__title">Учетная запись</div>
+            <div class="foot__title">Помощь</div>
+        </div>
+        <div class="footeer">
+            <div class="mainfooter">
+                <div class="footer">
+                    <div class="foot">
+                        <div class="foot__info">Арты</div>
+                        <div class="foot__info">3-d модели</div>
+                        <div class="foot__info">GameDev</div>
+                        <div class="foot__info">Темы</div>
+                        <div class="foot__info">Презентации</div>
+                        <div class="foot__info">Сайты</div>
+                        <div class="foot__info">Wordpress</div>
+                    </div>
+
+                    <div class="foot2">
+                        <div class="foot__info">Скрипты</div>
+                        <div class="foot__info">Приложения</div>
+                        <div class="foot__info">Анимации</div>
+                        <div class="foot__info">Музыка</div>
+                        <div class="foot__info">Фото</div>
+                        <div class="foot__info">Видео</div>
+                        <div class="foot__info">Шаблоны</div>
+                    </div>
+
+                    <div class="footer2">
+                        <div class="foot3">
+                            <div class="foot__info">Инвесторы</div>
+                            <div class="foot__info">Руководство</div>
+                            <div class="foot__info">Контактная информация</div>
+
+                            <div class="foot__title">Сервисы</div>
+                            <div class="foot__info">Торговая площадка</div>
+                        </div>
+                    </div>
+
+                    <div class="foot4">
+                        <div class="foot__info">Аккаунт DigiTail</div>
+                        <div class="foot__info">Условия учетной записи</div>
+                    </div>
+
+                    <div class="foot5">
+                        <div class="foot__info">Арты</div>
+                        <div class="foot__info">3-d модели</div>
+                        <div class="foot__info">GameDev</div>
+                        <div class="foot__info">Темы</div>
+                        <div class="foot__info">Презентации</div>
+                        <div class="foot__info">Сайты</div>
+                        <div class="foot__info">Wordpress</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="foot__info2">
+            <div class="foot__info22">Условия использования</div>
+            <div class="foot__info22">Политика конфиденциальности</div>
+            <div class="foot__info22">Юридическая информация</div>
+            <div class="foot__info22">Использование cookies</div>
+        </div>
+        <div class="digi">C DigiTail, 2022г</div>
+    </div>
+
+</section>
+<script>
+    addEventListener('load', function () {
+        addEventListener('scroll', function () {
+            document.querySelector('header').style.backgroundColor = document.documentElement.scrollTop > 55 ?
+                'rgb(0,0,0,0.7)' :
+                '#404040';
+        });
+    });
+</script>
+</body>
+</html>

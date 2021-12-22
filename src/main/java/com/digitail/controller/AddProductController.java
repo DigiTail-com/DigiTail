@@ -18,6 +18,7 @@ import javax.imageio.ImageIO;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
 
@@ -68,26 +69,34 @@ public class AddProductController {
         }
 
         var uuidFile = UUID.randomUUID().toString();
+
         var counter = 0;
+        var arrayFile = new ArrayList<File>();
+        for (var file:files) {
+            var resultFilename = new String();
+            if (file.getOriginalFilename().contains("c."))
+                resultFilename = uuidFile + "_" + counter + "c";
+            else resultFilename = uuidFile + "_" + counter;
+
+            var contentType = file.getContentType();
+            counter++;
+
+            var justFile = new File(pictureColorLayersPath + "/" + resultFilename + "." + "png");
+            file.transferTo(justFile);
+            arrayFile.add(justFile);
+        }
+
         pictureService.setPath(pictureColorDefaultPath);
-//        pictureService.CombineLayers(files, uuidFile); //совмещает слои и сохраняет по path и дает имя файлу uuidFile
-        product.setFileName("/uploads/pictureColor/default" + "/" + uuidFile + ".png");
+        pictureService.CombineLayers(arrayFile.toArray(new File[files.size()]), uuidFile);
+
+        product.setFileName(uuidFile);
+        product.setPath("/uploads/pictureColor/default" + "/" + uuidFile + ".png");
+//        product.setName(product.getName());
         product.setCategory(Category.PICTURE_COLOR);
         product.setUser(user);
         user.addProduct(product);
         productRepo.save(product);
         userRepo.saveAndFlush(user);
-
-        for (var file:files) {
-            String resultFilename = null;
-            if (file.getOriginalFilename().contains("c."))
-                resultFilename = uuidFile + "_" + counter + "c";
-            else resultFilename = uuidFile + "_" + counter;
-            var contentType = file.getContentType();
-            counter++;
-//            file.transferTo(new File(pictureColorLayersPath + "/" + resultFilename + "." + contentType.split("/")[1]));
-            file.transferTo(new File(pictureColorDefaultPath + "/" + uuidFile + "." + "png"));
-        }
 
         return "redirect:/";
     }
