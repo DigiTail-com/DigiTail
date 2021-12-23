@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Controller
@@ -38,6 +40,7 @@ public class AdminController{
     @GetMapping("/products")
     public String allProducts(Model model){
         model.addAttribute("products", productRepo.findAll());
+        model.addAttribute("flag", Status.DEFAULT.name());
         return "admin/show_products_for_admin";
     }
 
@@ -59,5 +62,21 @@ public class AdminController{
         productRepo.save(productFromDB);
 
         return "redirect:/admin/products/" + id;
+    }
+
+    @PostMapping("/products")
+    public String sortingProducts(@Valid String status, Model model){
+        var allProducts = productRepo.findAll();
+        Set<Product> products = new HashSet<Product>();
+        if (status.equals("Default"))
+            return "redirect:/admin/products";
+
+        for (var qw: allProducts) {
+            if (qw.getStatus().name().equals(status))
+                products.add(qw);
+        }
+        model.addAttribute("flag", status);
+        model.addAttribute("products", products);
+        return "admin/show_products_for_admin";
     }
 }
