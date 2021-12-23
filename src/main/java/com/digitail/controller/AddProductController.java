@@ -72,9 +72,9 @@ public class AddProductController {
 
         String path = DigiTailApplication.class.getProtectionDomain().getCodeSource().getLocation().getPath();
         String decodedPath = URLDecoder.decode(path, "UTF-8");
-        File folder = new File(decodedPath);
-        Path uploadLayersDir = Paths.get(folder.getAbsolutePath() + "/static" + pictureColorLayersPath);
-        Path uploadDefaultDir = Paths.get(folder.getAbsolutePath() + "/static" + pictureColorDefaultPath);
+        File folder = new File(decodedPath).getParentFile();
+        Path uploadLayersDir = Paths.get(folder.getAbsolutePath() + pictureColorLayersPath);
+        Path uploadDefaultDir = Paths.get(folder.getAbsolutePath() + pictureColorDefaultPath);
 
         Files.createDirectories(uploadLayersDir);
         Files.createDirectories(uploadDefaultDir);
@@ -102,7 +102,7 @@ public class AddProductController {
         pictureService.CombineLayers(arrayFile.toArray(new File[files.size()]), uuidFile);
 
         product.setFileName(uuidFile);
-        product.setPath(pictureColorDefaultPath + "/" + uuidFile + ".png");
+        product.setPath("/pictureColor/default"+ "/" + uuidFile + ".png");
 //        product.setName(product.getName());
         product.setUser(user);
         product.setStatus(Status.AWAITING);
