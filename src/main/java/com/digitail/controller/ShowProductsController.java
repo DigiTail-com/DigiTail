@@ -2,6 +2,7 @@ package com.digitail.controller;
 
 import com.digitail.changeColor.PictureService;
 import com.digitail.model.Category;
+import com.digitail.model.Product;
 import com.digitail.model.Status;
 import com.digitail.model.User;
 import com.digitail.repos.ProductRepo;
@@ -17,11 +18,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/product")
@@ -54,6 +59,16 @@ public class ShowProductsController {
             return "redirect:/";
         var products = productRepo.findAllByCategoryEqualsAndStatusEquals(Category.PICTURE_COLOR, Status.APPROVED);
 
+        model.addAttribute("products", products);
+        model.addAttribute("flag", Category.PICTURE_COLOR.name());
+        return "product/show_products";
+    }
+
+    @PostMapping("/showProducts")
+    public String sortingProducts(@Valid String category, Model model){
+        var products = productRepo.findAllByCategoryEqualsAndStatusEquals(Category.valueOf(category), Status.APPROVED);
+
+        model.addAttribute("flag", category);
         model.addAttribute("products", products);
         return "product/show_products";
     }

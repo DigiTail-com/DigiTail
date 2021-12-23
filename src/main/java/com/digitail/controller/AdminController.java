@@ -68,15 +68,18 @@ public class AdminController{
     public String sortingProducts(@Valid String status, Model model){
         var allProducts = productRepo.findAll();
         Set<Product> products = new HashSet<Product>();
-        if (status.equals("Default"))
-            return "redirect:/admin/products";
 
-        for (var qw: allProducts) {
-            if (qw.getStatus().name().equals(status))
-                products.add(qw);
+        if (Status.DEFAULT.name().equals(status))
+            model.addAttribute("products", productRepo.findAll());
+        else {
+            for (var qw : allProducts) {
+                if (qw.getStatus().name().equals(status))
+                    products.add(qw);
+            }
+            model.addAttribute("products", products);
         }
+
         model.addAttribute("flag", status);
-        model.addAttribute("products", products);
         return "admin/show_products_for_admin";
     }
 }

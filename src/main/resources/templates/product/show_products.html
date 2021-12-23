@@ -45,22 +45,14 @@
                         class="filterVectorIcon"></span>
                 </button>
                 <div class="filterSort">
-                    <div>
+                    <form method="post" th:action="@{/product/showProducts}">
                         <p>Сортировать по:</p>
-                        <button>популярности</button>
-                    </div>
-                    <div>
-                        <p>Автор:</p>
-                        <button>все</button>
-                    </div>
-                    <div>
-                        <p>Тема:</p>
-                        <button>все</button>
-                    </div>
-                    <div>
-                        <p>Размер:</p>
-                        <button>любой</button>
-                    </div>
+                        <select name="category" id="category">
+                            <option th:each="category : ${T(com.digitail.model.Category).values()}"
+                                    th:value="${category}" th:text="${category.getCommand()}" th:selected="${flag.equals(category.name())}"></option>
+                        </select>
+                        <button type="submit">Поиск</button>
+                    </form>
                 </div>
             </div>
             <div class="product">
