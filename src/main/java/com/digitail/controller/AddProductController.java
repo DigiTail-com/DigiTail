@@ -1,5 +1,6 @@
 package com.digitail.controller;
 
+import com.digitail.DigiTailApplication;
 import com.digitail.changeColor.PictureService;
 import com.digitail.model.Category;
 import com.digitail.model.Product;
@@ -9,6 +10,7 @@ import com.digitail.repos.ProductRepo;
 import com.digitail.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,10 @@ import javax.imageio.ImageIO;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
@@ -63,11 +69,16 @@ public class AddProductController {
     @PostMapping("/addProduct")
     public String addProduct(@RequestParam("file") Set<MultipartFile> files, @ModelAttribute("newProduct") @Valid Product product, @AuthenticationPrincipal User user) throws IOException {
 
-        File uploadDir = new File(uploadPath);
 
-        if (!uploadDir.exists()) {
-            uploadDir.mkdir();
-        }
+        String path = DigiTailApplication.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        String decodedPath = URLDecoder.decode(path, "UTF-8");
+        File folder = new File(decodedPath);
+        Path uploadLayersDir = Paths.get(folder.getAbsolutePath() + "/static" + pictureColorLayersPath);
+        Path uploadDefaultDir = Paths.get(folder.getAbsolutePath() + "/static" + pictureColorDefaultPath);
+
+        Files.createDirectories(uploadLayersDir);
+        Files.createDirectories(uploadDefaultDir);
+
 
         var uuidFile = UUID.randomUUID().toString();
 
@@ -82,16 +93,16 @@ public class AddProductController {
             var contentType = file.getContentType();
             counter++;
 
-            var justFile = new File(pictureColorLayersPath + "/" + resultFilename + "." + "png");
+            var justFile = new File(uploadLayersDir.toAbsolutePath() + "/" + resultFilename + "." + "png");
             file.transferTo(justFile);
             arrayFile.add(justFile);
         }
 
-        pictureService.setPath(pictureColorDefaultPath);
+        pictureService.setPath(uploadDefaultDir.toAbsolutePath().toString());
         pictureService.CombineLayers(arrayFile.toArray(new File[files.size()]), uuidFile);
 
         product.setFileName(uuidFile);
-        product.setPath("/uploads/pictureColor/default" + "/" + uuidFile + ".png");
+        product.setPath(pictureColorDefaultPath + "/" + uuidFile + ".png");
 //        product.setName(product.getName());
         product.setUser(user);
         product.setStatus(Status.AWAITING);

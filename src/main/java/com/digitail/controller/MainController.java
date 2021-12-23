@@ -21,6 +21,7 @@ import java.util.Collections;
 @RequestMapping("/")
 public class MainController {
 
+
     private UserRepo userRepo;
     private UserServiceImpl userServiceImpl;
 
@@ -31,12 +32,11 @@ public class MainController {
     }
 
     @GetMapping()
-    public String index(@AuthenticationPrincipal User user, Model model){
+    public String index(@AuthenticationPrincipal User user, Model model) {
         if (user == null) {
             model.addAttribute("flag", false);
             model.addAttribute("user", new User());
-        }
-        else {
+        } else {
             model.addAttribute("flag", true);
             model.addAttribute("user", user);
         }
@@ -52,7 +52,7 @@ public class MainController {
             return "redirect:/";
         }
 
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return "redirect:/";
         }
 

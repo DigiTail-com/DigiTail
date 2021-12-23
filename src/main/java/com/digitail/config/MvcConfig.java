@@ -6,12 +6,15 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.nio.file.Paths;
+
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
     @Value("${upload.path}")
     private String uploadPath;
 
     public void addViewControllers(ViewControllerRegistry registry){
+
         registry.addViewController("/login").setViewName("redirect:/");
     }
 
