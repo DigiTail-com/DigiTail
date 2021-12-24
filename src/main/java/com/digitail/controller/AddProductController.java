@@ -69,11 +69,7 @@ public class AddProductController {
 
     @PostMapping("/addProduct")
     public String addProduct(@RequestParam("file") Set<MultipartFile> files, @ModelAttribute("newProduct") @Valid Product product, @AuthenticationPrincipal User user) throws IOException, URISyntaxException {
-
-
-        var path = ClassLoader.getSystemClassLoader().getResource(".").toURI().getPath();
-        var decodedPath = URLDecoder.decode(path, "UTF-8");
-        File folder = new File(decodedPath).getParentFile();
+        File folder = new File(".");
         Path uploadLayersDir = Paths.get(folder.getAbsolutePath() + pictureColorLayersPath);
         Path uploadDefaultDir = Paths.get(folder.getAbsolutePath() + pictureColorDefaultPath);
 
