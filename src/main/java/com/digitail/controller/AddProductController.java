@@ -21,6 +21,7 @@ import javax.imageio.ImageIO;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -67,11 +68,11 @@ public class AddProductController {
     }
 
     @PostMapping("/addProduct")
-    public String addProduct(@RequestParam("file") Set<MultipartFile> files, @ModelAttribute("newProduct") @Valid Product product, @AuthenticationPrincipal User user) throws IOException {
+    public String addProduct(@RequestParam("file") Set<MultipartFile> files, @ModelAttribute("newProduct") @Valid Product product, @AuthenticationPrincipal User user) throws IOException, URISyntaxException {
 
 
-        String path = DigiTailApplication.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-        String decodedPath = URLDecoder.decode(path, "UTF-8");
+        var path = ClassLoader.getSystemClassLoader().getResource(".").toURI().getPath();
+        var decodedPath = URLDecoder.decode(path, "UTF-8");
         File folder = new File(decodedPath).getParentFile();
         Path uploadLayersDir = Paths.get(folder.getAbsolutePath() + pictureColorLayersPath);
         Path uploadDefaultDir = Paths.get(folder.getAbsolutePath() + pictureColorDefaultPath);
