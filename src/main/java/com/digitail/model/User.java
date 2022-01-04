@@ -1,22 +1,42 @@
 package com.digitail.model;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Set;
 
 @Entity
 @Table(name = "usr")
+@Getter
+@Setter
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @NotEmpty(message = "Username should not be empty")
+    @Size(min = 2, max = 30, message = "Username should be between 2 and 30 characters")
     private String username;
 
+    private String firstName;
+
+    private String secondName;
+
+    @NotEmpty(message = "Password should not be empty")
+    @Size(min = 3, message = "Password be more than 3 characters")
     private String password;
+
     private boolean active;
+
+    @Email(message = "Email should be valid")
     private String email;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
@@ -24,24 +44,11 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
-    public String getEmail() {
-        return email;
-    }
+    @OneToMany(mappedBy="user", fetch = FetchType.EAGER)
+    private Set<Product> products;
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
+    public void addProduct(Product product){
+        products.add(product);
     }
 
     @Override
@@ -64,36 +71,17 @@ public class User implements UserDetails {
         return isActive();
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public boolean isActive() {
         return active;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public String toString(){
+        return "";
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
 }

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>AccountReduct</title>
+    <link rel="stylesheet" href="Frame5Page.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+    <link media="all" type="text/css" rel="stylesheet" th:href="@{/public/css/add_product_style.css}"/>
+    <meta charset="UTF-8">
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <div class="header__inner">
+            <div class="header__logo"><span class="letter">D</span>igi<span class="letter">T</span>ail</div>
+            <nav class="nav">
+                <a class="nav__link" th:href="@{/}">главная</a>
+                <a class="nav__link" th:href="@{/product/showProducts}">категории</a>
+                <a class="nav__link" href="#">поддержка</a>
+                <a class="nav__img" th:href="@{/user}">
+                    <img th:src="@{/public/img/main_page/user2.png}" width="20" height="20">
+                </a>
+                <form style="display: inline-block" th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sign Out" class="loginButton logOutButton" />
+                </form>
+
+            </nav>
+        </div>
+    </div>
+</header>
+<div class="topnav">
+    <a href="#">Арты</a>
+    <a href="#">3d-модели</a>
+    <a href="#">GameDev</a>
+    <a href="#">Темы</a>
+    <a href="#">Презентации</a>
+    <a href="#">Сайты</a>
+    <a href="#">Шаблоны</a>
+    <a href="#">Wordpress</a>
+    <a href="#">Скрипты</a>
+</div>
+<div class="mainDiv">
+    <form class="menuDiv" method="post" th:action="@{/product/addProduct}" enctype="multipart/form-data" th:object="${product}">
+        <p class="menuDivP" >Добавление товара на торговую площадку</p>
+        <div class="menuDivFlexBox">
+            <div>
+                <div class="menuDivSelectDiv">
+                    <label>
+
+                        <select name="status" id="roles" th:field="*{category}">
+                            <option th:each="category : ${T(com.digitail.model.Category).values()}"
+                                    th:value="${category}" th:text="${category.getCommand()}" ></option>
+                        </select>
+                    </label>
+                </div>
+                <div class="menuDivPriceDiv">
+                    <input type="text" placeholder="ваша цена..." th:field="*{price}"/>
+                    <input type="text" placeholder="итоговая цена..."/>
+                    <span class="underSpanPrice">*с учётом комиссии</span>
+                </div>
+                    <input type="file" name="file" class="form-control-file" multiple>
+            </div>
+            <div>
+                <div class="enterTitleDiv"><textarea type="text" placeholder="Введите название..." th:field="*{name}"></textarea></div>
+                <div class="enterDescriptionDiv"><textarea type="text" placeholder="Описание товара..." th:field="*{description}"></textarea>
+                </div>
+                <div class="addPhotoDiv">
+                    <input type="button" value="добавьте фото">
+                    <span class="plus"></span>
+                </div>
+            </div>
+        </div>
+        <div class="saveButtonDiv">
+            <input type="submit" value="Сохранить">
+        </div>
+    </form>
+</div>
+
+<section class="section3">
+    <div class="container__foot">
+        <div class="foot__header">
+            <div class="foot__title">Категории товаров</div>
+            <div class="foot__title">О DigiTail</div>
+            <div class="foot__title">Учетная запись</div>
+            <div class="foot__title">Помощь</div>
+        </div>
+        <div class="footeer">
+            <div class="mainfooter">
+                <div class="footer">
+                    <div class="foot">
+                        <div class="foot__info">Арты</div>
+                        <div class="foot__info">3-d модели</div>
+                        <div class="foot__info">GameDev</div>
+                        <div class="foot__info">Темы</div>
+                        <div class="foot__info">Презентации</div>
+                        <div class="foot__info">Сайты</div>
+                        <div class="foot__info">Wordpress</div>
+                    </div>
+
+                    <div class="foot2">
+                        <div class="foot__info">Скрипты</div>
+                        <div class="foot__info">Приложения</div>
+                        <div class="foot__info">Анимации</div>
+                        <div class="foot__info">Музыка</div>
+                        <div class="foot__info">Фото</div>
+                        <div class="foot__info">Видео</div>
+                        <div class="foot__info">Шаблоны</div>
+                    </div>
+
+                    <div class="footer2">
+                        <div class="foot3">
+                            <div class="foot__info">Инвесторы</div>
+                            <div class="foot__info">Руководство</div>
+                            <div class="foot__info">Контактная информация</div>
+
+                            <div class="foot__title">Сервисы</div>
+                            <div class="foot__info">Торговая площадка</div>
+                        </div>
+                    </div>
+
+                    <div class="foot4">
+                        <div class="foot__info">Аккаунт DigiTail</div>
+                        <div class="foot__info">Условия учетной записи</div>
+                    </div>
+
+                    <div class="foot5">
+                        <div class="foot__info">Арты</div>
+                        <div class="foot__info">3-d модели</div>
+                        <div class="foot__info">GameDev</div>
+                        <div class="foot__info">Темы</div>
+                        <div class="foot__info">Презентации</div>
+                        <div class="foot__info">Сайты</div>
+                        <div class="foot__info">Wordpress</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="foot__info2">
+            <div class="foot__info22">Условия использования</div>
+            <div class="foot__info22">Политика конфиденциальности</div>
+            <div class="foot__info22">Юридическая информация</div>
+            <div class="foot__info22">Использование cookies</div>
+        </div>
+        <div class="digi">C DigiTail, 2022г</div>
+    </div>
+
+</section>
+<script>
+    addEventListener('load', function () {
+        addEventListener('scroll', function () {
+            document.querySelector('header').style.backgroundColor = document.documentElement.scrollTop > 55 ?
+                'rgb(0,0,0,0.7)' :
+                '#404040';
+        });
+    });
+</script>
+</body>
+</html>
