@@ -115,7 +115,7 @@ public class ShowProductsController {
 
                     // package files
                     for (var product : productRepo.findAll()) {
-                        var file = new File("uploads/" + product.getPath());
+                        var file = new File( product.getPath());
 
                         //new zip entry and copying inputstream with file to zipOutputStream, after all closing streams
                         zipOutputStream.putNextEntry(new ZipEntry(file.getName()));
