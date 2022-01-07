@@ -8,65 +8,6 @@ body {
     color: #039400;
 }
 
-.container {
-    width: 1300px;
-    margin: auto;
-}
-
-.header {
-    letter-spacing: 0.3em;
-    top: 0;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    width: 100%;
-    background-color: #404040;
-    position: sticky;
-}
-
-
-.header__inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.header__logo {
-    font-size: 20px;
-    font-weight: 400;
-    color: #fff;
-}
-
-
-.nav {
-    font-size: 12px;
-    font-weight: 400;
-    text-transform: uppercase;
-}
-
-
-.nav__link {
-    display: inline-block;
-    vertical-align: top;
-    margin: 0 15px;
-    margin-top: 5px;
-
-    color: #fff;
-    text-decoration: none;
-
-    transition: color 0.2s linear;
-}
-
-.nav__img {
-    display: inline-block;
-    vertical-align: center;
-    margin: 0 10px;
-    margin-top: 5px;
-}
-
-.nav__link:hover {
-    color: #fce38a;
-}
-
 .topnav {
     background-color: #333;
     overflow: hidden;
@@ -199,6 +140,28 @@ body {
     font-size: 36px;
     line-height: 49px;
     color: #686868;
+}
+
+/* Скрываем элемент <input type="file" /> */
+.form-control-file {
+    display: none;
+}
+
+/* Собственно стилизируем кнопку в соответствии с нужным внешним видом */
+.custom-file-upload {
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+    width: 477px;
+    height: 84px;
+    background: #C4C4C4;
+    border-radius: 15px;
+    font-size: 36px;
+    line-height: 49px;
+    color: #686868;
+    text-align: center;
+    padding-top: 23px;
+    margin-top: 92px;
 }
 
 .menuDivUploadDiv .plus {

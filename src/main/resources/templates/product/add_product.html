@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
           rel="stylesheet">
     <link media="all" type="text/css" rel="stylesheet" th:href="@{/public/css/add_product_style.css}"/>
+    <link media="all" type="text/css" rel="stylesheet" th:href="@{/public/css/mainHeaderFooter.css}"/>
     <meta charset="UTF-8">
 </head>
 <body>
@@ -24,7 +25,7 @@
                     <img th:src="@{/public/img/main_page/user2.png}" width="20" height="20">
                 </a>
                 <form style="display: inline-block" th:action="@{/logout}" method="post">
-                    <input type="submit" value="Sign Out" class="loginButton logOutButton" />
+                    <input type="submit" value="Sign Out" class="loginButton logOutButton"/>
                 </form>
 
             </nav>
@@ -43,8 +44,9 @@
     <a href="#">Скрипты</a>
 </div>
 <div class="mainDiv">
-    <form class="menuDiv" method="post" th:action="@{/product/addProduct}" enctype="multipart/form-data" th:object="${product}">
-        <p class="menuDivP" >Добавление товара на торговую площадку</p>
+    <form class="menuDiv" method="post" th:action="@{/product/addProduct}" enctype="multipart/form-data"
+          th:object="${product}">
+        <p class="menuDivP">Добавление товара на торговую площадку</p>
         <div class="menuDivFlexBox">
             <div>
                 <div class="menuDivSelectDiv">
@@ -52,7 +54,7 @@
 
                         <select name="status" id="roles" th:field="*{category}">
                             <option th:each="category : ${T(com.digitail.model.Category).values()}"
-                                    th:value="${category}" th:text="${category.getCommand()}" ></option>
+                                    th:value="${category}" th:text="${category.getCommand()}"></option>
                         </select>
                     </label>
                 </div>
@@ -61,11 +63,16 @@
                     <input type="text" placeholder="итоговая цена..."/>
                     <span class="underSpanPrice">*с учётом комиссии</span>
                 </div>
+                <label class="custom-file-upload">
                     <input type="file" name="file" class="form-control-file" multiple>
+                    Добавить файл
+                </label>
             </div>
             <div>
-                <div class="enterTitleDiv"><textarea type="text" placeholder="Введите название..." th:field="*{name}"></textarea></div>
-                <div class="enterDescriptionDiv"><textarea type="text" placeholder="Описание товара..." th:field="*{description}"></textarea>
+                <div class="enterTitleDiv"><textarea type="text" placeholder="Введите название..."
+                                                     th:field="*{name}"></textarea></div>
+                <div class="enterDescriptionDiv"><textarea type="text" placeholder="Описание товара..."
+                                                           th:field="*{description}"></textarea>
                 </div>
                 <div class="addPhotoDiv">
                     <input type="button" value="добавьте фото">

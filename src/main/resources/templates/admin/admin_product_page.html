@@ -5,6 +5,7 @@
     <title>productOneMorning</title>
     <link  media="all" rel="stylesheet" th:href="@{/public/css/product_page.css}">
     <link media="all" type="text/css" rel="stylesheet" th:href="@{/public/css/add_product_style.css}"/>
+    <link media="all" type="text/css" rel="stylesheet" th:href="@{/public/css/mainHeaderFooter.css}"/>
     <meta charset="UTF-8">
 </head>
 <body>
@@ -40,8 +41,10 @@
 </div>
 <div class="productOneMorning">
     <div class="mainProduct">
-        <img th:src="${product.getPath()}" class="mainProdImg">
-        <div class="mainProdInfo" style="max-width: 400px;">
+        <div class="mainProdImageDiv">
+            <img th:src="${product.getPath()}" class="mainProdImg">
+        </div>
+        <div class="mainProdInfo">
             <div class="mainProdInfoDiv">
                 <h1 >"Morning"<span>by Roves</span></h1>
                 <h1 style="color: yellow" th:text="${product.getStatus().getCommand()}"></h1>
@@ -53,7 +56,7 @@
                 </ul>
             </div>
             <form class="mainProdInfoButtonDiv" method="get" th:action="@{/product/download/{id}(id = ${product.getId()})}">
-                <button class="mainProdButton" type="submit" th:text="${product.getPrice() + '$'}" >
+                <button class="mainProdButton" type="submit" style="margin-top: 36px !important;" th:text="${product.getPrice() + '$'}" >
                 </button>
             </form>
         </div>

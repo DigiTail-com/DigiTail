@@ -39,7 +39,7 @@ h1, h2, h3, h4, h5, h6 {
     max-width: 1800px;
     margin: 0 auto;
     height: 800px;
-    
+
 }
 
 .container__about {
@@ -67,7 +67,7 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: center;
     width: 100%;
     height: 100vh;
-    
+
     background: url("../img/intro.png") center no-repeat;
     background-size: cover;
 }
@@ -76,7 +76,7 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     max-width: 1080px;
     margin: 0 auto;
-    
+
     text-align: center;
     background: black;
     background-color: rgba(0, 0, 0, 0.5);
@@ -94,11 +94,11 @@ h1, h2, h3, h4, h5, h6 {
 
     text-align: center;
     line-height: 1.2;
-    
+
     margin: 20px auto;
     width: 100%;
     max-width: 1000px;
-    
+
     display: inline-block;
     vertical-align: top;
     margin-top: 20px;
@@ -109,10 +109,10 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 10px;
     font-size: 24px;
     font-weight: 400;
-    
+
     color: #fff;
     text-align: center;
- 
+
 }
 
 .intro__suptitle:after {
@@ -121,10 +121,10 @@ h1, h2, h3, h4, h5, h6 {
     width: 300px;
     height: 1px;
     margin: 40px auto;
-    
+
     background-color: #fff;
-    
-    
+
+
 }
 
 /*Header*/
@@ -138,7 +138,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-.header__inner{
+.header__inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -148,7 +148,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 20px;
     font-weight: 400;
     color: #fff;
-    padding-left: 40px;
+    margin-left: 40px;
 }
 
 
@@ -164,11 +164,11 @@ h1, h2, h3, h4, h5, h6 {
     display: inline-block;
     vertical-align: top;
     margin: 0 15px;
-    margin-top: 5px;
-    
+    margin-top: 6px;
+
     color: #fff;
     text-decoration: none;
-    
+
     transition: color 0.2s linear;
 }
 
@@ -176,11 +176,17 @@ h1, h2, h3, h4, h5, h6 {
     display: inline-block;
     vertical-align: center;
     margin: 0 10px;
-    margin-top: 5px;
+    margin-top: 8px;
 }
 
 .nav__link:hover {
     color: #fce38a;
+}
+
+.logOutButton {
+    position: relative;
+    border-radius: 15px;
+    top: -4px;
 }
 
 /*Button*/
@@ -190,14 +196,14 @@ h1, h2, h3, h4, h5, h6 {
     padding: 15px 50px;
     background-color: #FF9900;
     margin-bottom: 25px;
-    
+
     font-size: 30px;
     font-weight: 700;
     color: #1C1C1C;
     text-transform: uppercase;
     text-decoration: none;
     border-radius: 10px;
-    
+
     transition: background 0.1s linear, color 0.1s linear;
 }
 
@@ -205,7 +211,6 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #1C1C1C;
     color: #FF9900;
 }
-
 
 
 /*Section*/
@@ -217,17 +222,17 @@ h1, h2, h3, h4, h5, h6 {
 .section__header {
     display: inline-block;
     vertical-align: top;
-    
+
     width: 13%;
     margin-top: 10px;
     padding-left: 40px;
     padding-right: 20px;
-    
+
     font-weight: 200;
     color: #fff;
     text-align: left;
     background: black;
-    background: rgba(0, 0, 0, 0.7); 
+    background: rgba(0, 0, 0, 0.7);
     font-size: 14px;
 }
 
@@ -235,57 +240,57 @@ h1, h2, h3, h4, h5, h6 {
 .slider {
     display: flex;
     flex-direction: row;
-    
+
     margin-top: 25px;
 }
 
 .slider__item {
     display: inline-block;
     vertical-align: top;
-    
+
     width: 100%;
     max-width: 500px;
     font-size: 30px;
     color: #fff;
-    
+
     padding-left: 15px;
     padding-top: 15px;
     margin-left: 20px;
     margin-right: 20px;
     padding-right: 5px;
-    
-    background: rgba(0, 0, 0, 0.7); 
+
+    background: rgba(0, 0, 0, 0.7);
 }
 
 .slider__item2 {
     display: inline-block;
     vertical-align: top;
-    
+
     width: 100%;
     max-width: 500px;
     font-size: 30px;
     color: #fff;
-    
+
     padding-left: 20px;
     padding-top: 15px;
-    
+
     background: rgba(0, 0, 0, 0.7);
 }
 
 .slider__item3 {
     display: inline-block;
     vertical-align: top;
-    
+
     width: 100%;
     max-width: 500px;
     font-size: 30px;
     color: #fff;
-    
+
     padding-left: 20px;
     padding-top: 15px;
     margin-left: 20px;
     margin-right: 20px;
-    
+
     background: rgba(0, 0, 0, 0.7);
 }
 
@@ -294,7 +299,7 @@ h1, h2, h3, h4, h5, h6 {
 .shop1 {
     display: flex;
     flex-direction: row;
-    
+
     padding-left: 20px;
     padding-right: 20px;
 }
@@ -306,7 +311,7 @@ h1, h2, h3, h4, h5, h6 {
     padding-bottom: 20px;
     padding-left: 10px;
     padding-right: 10px;
-    
+
     background: rgba(0, 0, 0, 0.7);
 }
 
@@ -317,7 +322,7 @@ h1, h2, h3, h4, h5, h6 {
     padding-bottom: 20px;
     padding-left: 10px;
     padding-right: 10px;
-    
+
     background: rgba(0, 0, 0, 0.7);
 }
 
@@ -328,7 +333,7 @@ h1, h2, h3, h4, h5, h6 {
     padding-left: 10px;
     padding-right: 10px;
     margin-right: 20px;
-    
+
     background: rgba(0, 0, 0, 0.7);
 }
 
@@ -345,7 +350,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .mainitem__back {
     background: rgba(0, 0, 0, 0.7);
-    
+
     padding-left: 15px;
     margin-right: 20px;
     padding-right: 15px;
@@ -353,7 +358,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .mainitem__back2 {
     background: rgba(0, 0, 0, 0.7);
-    
+
     padding-left: 15px;
     margin-right: 20px;
     padding-right: 15px;
@@ -361,7 +366,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .mainitem__back3 {
     background: rgba(0, 0, 0, 0.7);
-    
+
     padding-left: 15px;
 
     padding-right: 15px;
@@ -369,7 +374,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .shop__item2 {
     margin: 5px;
-    
+
     width: 100%;
     max-width: 230px;
     height: auto;
@@ -392,7 +397,7 @@ h1, h2, h3, h4, h5, h6 {
 .shop__img img {
     display: block;
     transition: opacity 0.2s linear;
-    
+
     width: 100%;
     max-width: 490px;
     height: auto;
@@ -405,7 +410,7 @@ h1, h2, h3, h4, h5, h6 {
     text-transform: uppercase;
     text-align: center;
     opacity: 0;
-    
+
     position: absolute;
     top: 50%;
     left: 0;
@@ -421,7 +426,7 @@ h1, h2, h3, h4, h5, h6 {
     height: 2px;
     margin: 25px auto;
     margin-top: 45px;
-    
+
     background-color: #fff;
 }
 
@@ -446,9 +451,9 @@ h1, h2, h3, h4, h5, h6 {
 .stat__item {
     flex: 1 1 0;
     padding: 70px 25px;
-    
+
     border-left: 1px solid #b5eae0;
-    
+
     text-align: center;
     padding-top: 50px;
     color: #fff;
@@ -461,7 +466,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .stat__count {
     margin-bottom: 10px;
-    
+
     font-size: 60px;
     font-weight: 600;
     line-height: 1;
@@ -470,7 +475,7 @@ h1, h2, h3, h4, h5, h6 {
 .stat__text {
     font-size: 14px;
     text-transform: uppercase;
-    
+
 }
 
 /*About*/
@@ -492,7 +497,7 @@ h1, h2, h3, h4, h5, h6 {
 .section__header2 {
     display: inline-block;
     vertical-align: top;
-    
+
     width: 40%;
     margin-top: 25px;
     margin-left: 100px;
@@ -554,11 +559,11 @@ h1, h2, h3, h4, h5, h6 {
 .join__header {
     display: inline-block;
     vertical-align: top;
-    
+
     width: 100%;
     margin-bottom: 20px;
     margin-top: 60px;
-    
+
     color: #fff;
     text-align: center;
     font-size: 25px;
@@ -579,16 +584,16 @@ h1, h2, h3, h4, h5, h6 {
     vertical-align: top;
     padding: 10px 20px;
     background-color: rgba(0, 0, 0, 0.3);
-    
+
     font-size: 30px;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.9);
     text-transform: uppercase;
     text-decoration: none;
     border-radius: 40px;
-    
+
     margin-top: 40px;
-    
+
     transition: background 0.1s linear, color 0.1s linear;
 }
 
@@ -601,7 +606,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 30px;
     margin-bottom: 60px;
     font-size: 25px;
-    
+
     text-align: center;
     color: #fff;
 }
@@ -688,7 +693,7 @@ h1, h2, h3, h4, h5, h6 {
     height: 1px;
     margin-top: 100px;
     margin-bottom: 100px;
-    
+
     background-color: #686868;
 }
 
@@ -705,7 +710,7 @@ h1, h2, h3, h4, h5, h6 {
     height: 1px;
     margin-top: 20px;
     margin-bottom: 20px;
-    
+
     background-color: #686868;
 }
 

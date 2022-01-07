@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    font-family: Manrope, sans-serif;
+    font-family: 'Manrope', sans-serif;
     font-style: normal;
 }
 
@@ -109,9 +109,15 @@ body {
     padding-left: 30px;
 }
 
+.mainProdImageDiv {
+    max-width: 940px;
+    max-height: 536px;
+    text-align: center;
+}
+
 .mainProduct img {
-    width: 940px;
-    height: 536px;
+    max-width: 940px;
+    max-height: 536px;
 }
 
 .mainProdInfo {
@@ -158,7 +164,7 @@ body {
 .mainProdDescription {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
 }
 
 .prodDescription {
@@ -167,8 +173,9 @@ body {
 }
 
 .mainProdDescriptionP {
+    width: 1206px;
     height: 696px;
-    padding: 0 128px;
+    padding: 40px 240px;
     background-color: #F8F8F8;
     display: inline-block;
     color: #5b5b5b;
