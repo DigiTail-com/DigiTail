@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Set;
 
 @Repository
-public interface ProductRepo extends CrudRepository<Product, Long> {
+public interface ProductRepository extends CrudRepository<Product, Long> {
     Set<Product> findAllByUser(User user);
     Set<Product> findAllByCategoryEqualsAndStatusEquals(Category category, Status status);
 

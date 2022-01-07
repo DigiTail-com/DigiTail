@@ -1,6 +1,5 @@
 package com.digitail.model;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -36,6 +35,8 @@ public class User implements UserDetails {
 
     private boolean active;
 
+    private Float money;
+
     @Email(message = "Email should be valid")
     private String email;
 
@@ -46,6 +47,9 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy="user", fetch = FetchType.EAGER)
     private Set<Product> products;
+
+//    @OneToOne(mappedBy="user", fetch = FetchType.EAGER)
+//    private Set<BasketGoods> basketGoods;
 
     public void addProduct(Product product){
         products.add(product);

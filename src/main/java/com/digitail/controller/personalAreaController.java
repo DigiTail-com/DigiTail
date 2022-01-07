@@ -1,9 +1,10 @@
 package com.digitail.controller;
 
+import com.digitail.model.Card;
 import com.digitail.model.Product;
 import com.digitail.model.Status;
 import com.digitail.model.User;
-import com.digitail.repos.ProductRepo;
+import com.digitail.repos.ProductRepository;
 import com.digitail.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -19,12 +20,13 @@ import javax.validation.Valid;
 public class personalAreaController {
 
     private UserService userService;
-    private ProductRepo productRepo;
+    private ProductRepository productRepository;
+    private Model errorModel;
 
     @Autowired
-    public personalAreaController(UserService userService, ProductRepo productRepo) {
+    public personalAreaController(UserService userService, ProductRepository productRepository) {
         this.userService = userService;
-        this.productRepo = productRepo;
+        this.productRepository = productRepository;
     }
 
     @GetMapping("")
@@ -52,14 +54,14 @@ public class personalAreaController {
 
     @GetMapping("/products")
     public String showUserProducts(@AuthenticationPrincipal User user, Model model){
-        var products = productRepo.findAllByUser(user);
+        var products = productRepository.findAllByUser(user);
         model.addAttribute("products", products);
         return "product/user_products";
     }
 
     @GetMapping("/showProduct/{id}")
     public String showUserProduct(@PathVariable long id, @AuthenticationPrincipal User user, Model model){
-        model.addAttribute("product", productRepo.findById(id));
+        model.addAttribute("product", productRepository.findById(id));
         return "product/user_product_page";
     }
 
@@ -67,15 +69,73 @@ public class personalAreaController {
     public String editUserProduct(@PathVariable long id,
                                   @ModelAttribute("product") @Valid Product product,
                                   @AuthenticationPrincipal User user){
-        var productFromDB = productRepo.findById(id);
+        var productFromDB = productRepository.findById(id);
         productFromDB.setStatus(Status.AWAITING);
         productFromDB.setName(product.getName());
         productFromDB.setDescription(product.getDescription());
         productFromDB.setPrice(product.getPrice());
         productFromDB.setCategory(product.getCategory());
 
-        productRepo.save(productFromDB);
+        productRepository.save(productFromDB);
 
         return "redirect:/user/showProduct/" + id;
+    }
+
+    @GetMapping("/addMoney")
+    public String addMoney(@AuthenticationPrincipal User user,
+                           Model model){
+        try{
+            if (errorModel.containsAttribute("incorrectCard"))
+                model.addAttribute("incorrectCard", true);
+        }catch (Exception exception){
+            model.addAttribute("incorrectCard", false);
+        }
+
+        try{
+            if (errorModel.containsAttribute("notEnoughMoney"))
+                model.addAttribute("notEnoughMoney", true);
+        }catch (Exception exception){
+            model.addAttribute("notEnoughMoney", false);
+        }
+
+        try{
+            if (errorModel.containsAttribute("moneyShouldBePositive"))
+                model.addAttribute("moneyShouldBePositive", true);
+        }catch (Exception exception){
+            model.addAttribute("moneyShouldBePositive", false);
+        }
+
+        errorModel = null;
+
+        model.addAttribute("card", new Card());
+        return null;
+    }
+
+    @PostMapping("/addMoney/{numberOfMoney}")
+    public String addMoneyProcess(@PathVariable Float numberOfMoney,
+                                  @ModelAttribute("card") Card card,
+                                  @AuthenticationPrincipal User user,
+                                  Model model){
+        errorModel = model;
+
+        if (numberOfMoney <= 0){
+            errorModel.addAttribute("moneyShouldBePositive", true);
+            return "redirect:/user/addMoney";
+        }
+
+        //проверка карты
+        if (!card.check()) {
+            errorModel.addAttribute("incorrectCard", true);
+            return "redirect:/user/addMoney";
+        }
+
+        if (!card.checkMoney()){
+            errorModel.addAttribute("notEnoughMoney", true);
+            return "redirect:/user/addMoney";
+        }
+
+        user.setMoney(user.getMoney() + numberOfMoney);
+        userService.saveUser(user);
+        return null;
     }
 }

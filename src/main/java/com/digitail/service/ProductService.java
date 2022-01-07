@@ -1,11 +1,11 @@
 package com.digitail.service;
 
-import com.digitail.repos.ProductRepo;
+import com.digitail.repos.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ProductService {
     @Autowired
-    private ProductRepo productRepo;
+    private ProductRepository productRepository;
 
 
 }

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "Product")
@@ -31,7 +32,11 @@ public class Product {
     private Category category;
 
     private String techDescription;
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, optional=true)
     private User user;
+
+    @OneToMany(mappedBy="product", fetch = FetchType.EAGER)
+    private Set<BasketGoods> basketGoods;
 
 }

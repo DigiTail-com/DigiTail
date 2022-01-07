@@ -2,7 +2,8 @@ package com.digitail.controller;
 
 import com.digitail.model.Role;
 import com.digitail.model.User;
-import com.digitail.repos.UserRepo;
+import com.digitail.repos.UserRepository;
+import com.digitail.service.impl.BasketServiceImpl;
 import com.digitail.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,13 +23,17 @@ import java.util.Collections;
 public class MainController {
 
 
-    private UserRepo userRepo;
+    private UserRepository userRepository;
     private UserServiceImpl userServiceImpl;
+    private BasketServiceImpl basketService;
 
     @Autowired
-    public MainController(UserRepo userRepo, UserServiceImpl userServiceImpl) {
-        this.userRepo = userRepo;
+    public MainController(UserRepository userRepository,
+                          UserServiceImpl userServiceImpl,
+                          BasketServiceImpl basketService) {
+        this.userRepository = userRepository;
         this.userServiceImpl = userServiceImpl;
+        this.basketService = basketService;
     }
 
     @GetMapping()
@@ -39,6 +44,7 @@ public class MainController {
         } else {
             model.addAttribute("flag", true);
             model.addAttribute("user", user);
+            model.addAttribute("basketSum",basketService.findSum(user));
         }
 
         return "index2";
@@ -60,7 +66,8 @@ public class MainController {
         if (user.getUsername().equals("Admin"))
             user.setRoles(Collections.singleton(Role.ADMIN));
         else user.setRoles(Collections.singleton(Role.USER));
-        userRepo.save(user);
+        user.setMoney(0.0f);
+        userRepository.save(user);
 
         return "redirect:/";
     }

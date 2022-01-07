@@ -2,11 +2,10 @@ package com.digitail.controller;
 
 import com.digitail.changeColor.PictureService;
 import com.digitail.model.Category;
-import com.digitail.model.Product;
 import com.digitail.model.Status;
 import com.digitail.model.User;
-import com.digitail.repos.ProductRepo;
-import com.digitail.repos.UserRepo;
+import com.digitail.repos.ProductRepository;
+import com.digitail.repos.UserRepository;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,18 +26,15 @@ import javax.validation.Valid;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 @Controller
 @RequestMapping("/product")
 public class ShowProductsController {
-    private ProductRepo productRepo;
+    private ProductRepository productRepository;
 
-    private UserRepo userRepo;
+    private UserRepository userRepository;
 
     private PictureService pictureService;
 
@@ -52,9 +48,9 @@ public class ShowProductsController {
     private String pictureColorLayersPath;
 
     @Autowired
-    public ShowProductsController(ProductRepo productRepo, UserRepo userRepo, PictureService picture) {
-        this.productRepo = productRepo;
-        this.userRepo = userRepo;
+    public ShowProductsController(ProductRepository productRepository, UserRepository userRepository, PictureService picture) {
+        this.productRepository = productRepository;
+        this.userRepository = userRepository;
         this.pictureService = picture;
     }
 
@@ -62,7 +58,7 @@ public class ShowProductsController {
     public String showProduct(Model model, @AuthenticationPrincipal User user){
         if (user == null)
             return "redirect:/";
-        var products = productRepo.findAllByCategoryEqualsAndStatusEquals(Category.PICTURE_COLOR, Status.APPROVED);
+        var products = productRepository.findAllByCategoryEqualsAndStatusEquals(Category.PICTURE_COLOR, Status.APPROVED);
 
         model.addAttribute("products", products);
         model.addAttribute("flag", Category.PICTURE_COLOR.name());
@@ -71,7 +67,7 @@ public class ShowProductsController {
 
     @PostMapping("/showProducts")
     public String sortingProducts(@Valid String category, Model model){
-        var products = productRepo.findAllByCategoryEqualsAndStatusEquals(Category.valueOf(category), Status.APPROVED);
+        var products = productRepository.findAllByCategoryEqualsAndStatusEquals(Category.valueOf(category), Status.APPROVED);
 
         model.addAttribute("flag", category);
         model.addAttribute("products", products);
@@ -83,13 +79,13 @@ public class ShowProductsController {
         if (user == null)
             return "redirect:/";
 
-        model.addAttribute("product", productRepo.findById(id));
+        model.addAttribute("product", productRepository.findById(id));
         return "product/product_page";
     }
 
     @GetMapping("/download/{id}")
     public ResponseEntity<Object> downloadFile(@PathVariable("id") long id, @AuthenticationPrincipal User user) throws FileNotFoundException {
-        var product = productRepo.findById(id);
+        var product = productRepository.findById(id);
         String fileName = product.getPath();
         var file = new File("uploads/" + fileName);
         var resources = new InputStreamResource(new FileInputStream(file));
@@ -114,7 +110,7 @@ public class ShowProductsController {
                     var zipOutputStream = new ZipOutputStream(out);
 
                     // package files
-                    for (var product : productRepo.findAll()) {
+                    for (var product : productRepository.findAll()) {
                         var file = new File("uploads/" + product.getPath());
 
                         //new zip entry and copying inputstream with file to zipOutputStream, after all closing streams

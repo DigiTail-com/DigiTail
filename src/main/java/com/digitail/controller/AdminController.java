@@ -1,11 +1,9 @@
 package com.digitail.controller;
 
-import antlr.collections.List;
 import com.digitail.model.Product;
 import com.digitail.model.Status;
-import com.digitail.model.User;
-import com.digitail.repos.ProductRepo;
-import com.digitail.repos.UserRepo;
+import com.digitail.repos.ProductRepository;
+import com.digitail.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -22,55 +20,55 @@ import java.util.Set;
 @PreAuthorize("hasAuthority('ADMIN')")
 public class AdminController{
 
-    private UserRepo userRepo;
-    private ProductRepo productRepo;
+    private UserRepository userRepository;
+    private ProductRepository productRepository;
 
     @Autowired
-    public AdminController(UserRepo userRepo, ProductRepo productRepo) {
-        this.userRepo = userRepo;
-        this.productRepo = productRepo;
+    public AdminController(UserRepository userRepository, ProductRepository productRepository) {
+        this.userRepository = userRepository;
+        this.productRepository = productRepository;
     }
 
     @GetMapping()
     public String UsersList(Model model){
-        model.addAttribute("users", userRepo.findAll());
+        model.addAttribute("users", userRepository.findAll());
         return "userList";
     }
 
     @GetMapping("/products")
     public String allProducts(Model model){
-        model.addAttribute("products", productRepo.findAll());
+        model.addAttribute("products", productRepository.findAll());
         model.addAttribute("flag", Status.DEFAULT.name());
         return "admin/show_products_for_admin";
     }
 
     @GetMapping("/products/{id}")
     public String showProduct(@PathVariable("id") long id, Model model){
-        model.addAttribute("product", productRepo.findById(id));
+        model.addAttribute("product", productRepository.findById(id));
         return "admin/admin_product_page";
     }
 
     @PostMapping("/editProduct/{id}")
     public String editProduct(@PathVariable("id") long id, @ModelAttribute("product") @Valid Product product){
-        var productFromDB = productRepo.findById(id);
+        var productFromDB = productRepository.findById(id);
         productFromDB.setStatus(product.getStatus());
         productFromDB.setName(product.getName());
         productFromDB.setDescription(product.getDescription());
         productFromDB.setPrice(product.getPrice());
         productFromDB.setCategory(product.getCategory());
 
-        productRepo.save(productFromDB);
+        productRepository.save(productFromDB);
 
         return "redirect:/admin/products/" + id;
     }
 
     @PostMapping("/products")
     public String sortingProducts(@Valid String status, Model model){
-        var allProducts = productRepo.findAll();
+        var allProducts = productRepository.findAll();
         Set<Product> products = new HashSet<Product>();
 
         if (Status.DEFAULT.name().equals(status))
-            model.addAttribute("products", productRepo.findAll());
+            model.addAttribute("products", productRepository.findAll());
         else {
             for (var qw : allProducts) {
                 if (qw.getStatus().name().equals(status))

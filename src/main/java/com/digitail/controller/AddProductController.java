@@ -1,28 +1,23 @@
 package com.digitail.controller;
 
-import com.digitail.DigiTailApplication;
 import com.digitail.changeColor.PictureService;
-import com.digitail.model.Category;
 import com.digitail.model.Product;
 import com.digitail.model.Status;
 import com.digitail.model.User;
-import com.digitail.repos.ProductRepo;
-import com.digitail.repos.UserRepo;
+import com.digitail.repos.ProductRepository;
+import com.digitail.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.imageio.ImageIO;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -34,9 +29,9 @@ import java.util.UUID;
 @RequestMapping("/product")
 public class AddProductController {
 
-    private ProductRepo productRepo;
+    private ProductRepository productRepository;
 
-    private UserRepo userRepo;
+    private UserRepository userRepository;
 
     private PictureService pictureService;
 
@@ -50,9 +45,9 @@ public class AddProductController {
     private String pictureColorLayersPath;
 
     @Autowired
-    public AddProductController(ProductRepo productRepo, UserRepo userRepo, PictureService picture) {
-        this.productRepo = productRepo;
-        this.userRepo = userRepo;
+    public AddProductController(ProductRepository productRepository, UserRepository userRepository, PictureService picture) {
+        this.productRepository = productRepository;
+        this.userRepository = userRepository;
         this.pictureService = picture;
     }
 
@@ -105,8 +100,8 @@ public class AddProductController {
         product.setUser(user);
         product.setStatus(Status.AWAITING);
         user.addProduct(product);
-        productRepo.save(product);
-        userRepo.saveAndFlush(user);
+        productRepository.save(product);
+        userRepository.saveAndFlush(user);
 
         return "redirect:/";
     }
