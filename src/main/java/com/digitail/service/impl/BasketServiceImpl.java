@@ -1,5 +1,6 @@
 package com.digitail.service.impl;
 
+import com.digitail.model.BasketGoods;
 import com.digitail.model.Product;
 import com.digitail.model.User;
 import com.digitail.repos.BasketRepository;
@@ -13,7 +14,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
-public class BasketServiceImpl implements IService {
+public class BasketServiceImpl implements IService<BasketGoods> {
 
     private final BasketRepository basketRepository;
 
@@ -41,17 +42,17 @@ public class BasketServiceImpl implements IService {
     }
 
     @Override
-    public Collection findAll() {
+    public Collection<BasketGoods> findAll() {
         return null;
     }
 
     @Override
-    public Optional findById(Long id) {
+    public Optional<BasketGoods> findById(Long id) {
         return Optional.empty();
     }
 
     @Override
-    public Object saveOrUpdate(Object o) {
+    public BasketGoods saveOrUpdate(BasketGoods o) {
         return null;
     }
 

@@ -25,13 +25,13 @@ public class User implements UserDetails {
     @Size(min = 2, max = 30, message = "Username should be between 2 and 30 characters")
     private String username;
 
-    private String firstName;
-
-    private String secondName;
-
     @NotEmpty(message = "Password should not be empty")
     @Size(min = 3, message = "Password be more than 3 characters")
     private String password;
+
+    private String firstName;
+
+    private String secondName;
 
     private boolean active;
 
@@ -39,6 +39,9 @@ public class User implements UserDetails {
 
     @Email(message = "Email should be valid")
     private String email;
+
+    @OneToOne(mappedBy="user", fetch = FetchType.EAGER)
+    private Card card;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
@@ -48,8 +51,8 @@ public class User implements UserDetails {
     @OneToMany(mappedBy="user", fetch = FetchType.EAGER)
     private Set<Product> products;
 
-//    @OneToOne(mappedBy="user", fetch = FetchType.EAGER)
-//    private Set<BasketGoods> basketGoods;
+    @OneToOne(mappedBy="user", fetch = FetchType.EAGER)
+    private BasketGoods basketGoods;
 
     public void addProduct(Product product){
         products.add(product);
