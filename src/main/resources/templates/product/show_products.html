@@ -41,7 +41,7 @@
     </div>
     <div class="categories">
         <div class="productAndFilter">
-            <div class="sideFilter" id="sideFilter">
+            <div class="sideFilter">
                 <button class="filterButton"><span class="filterIcon"></span>фильтр<span
                         class="filterVectorIcon"></span>
                 </button>
@@ -144,6 +144,8 @@
                 '#404040';
         });
     });
+    let productsLength = document.querySelector(".product").children.length;
+    document.querySelector(".categories").style.height = 320 + Math.ceil(productsLength/3)*260 + 'px';
 </script>
 </body>
 </html>

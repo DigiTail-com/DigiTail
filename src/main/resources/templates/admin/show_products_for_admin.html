@@ -62,10 +62,11 @@
                         <p>Тема:</p>
                         <button>все</button>
                     </div>-->
+                    <!--
                     <div>
                         <p>Размер:</p>
                         <button>любой</button>
-                    </div>
+                    </div>-->
                 </div>
             </div>
             <div class="product">
@@ -156,6 +157,8 @@
                 '#404040';
         });
     });
+    let productsLength = document.querySelector(".product").children.length;
+    document.querySelector(".categories").style.height = 320 + Math.ceil(productsLength/3)*260 + 'px';
 </script>
 </body>
 </html>

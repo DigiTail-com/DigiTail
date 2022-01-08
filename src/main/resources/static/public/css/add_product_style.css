@@ -65,6 +65,16 @@ body {
     width: 632px;
 }
 
+.chooseCategSign {
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+.menuDivSelectDiv {
+    margin-bottom: 25px;
+}
+
 .menuDivSelectDiv select {
     font-size: 20px;
     line-height: 27px;
@@ -142,12 +152,10 @@ body {
     color: #686868;
 }
 
-/* Скрываем элемент <input type="file" /> */
 .form-control-file {
     display: none;
 }
 
-/* Собственно стилизируем кнопку в соответствии с нужным внешним видом */
 .custom-file-upload {
     display: inline-block;
     cursor: pointer;
