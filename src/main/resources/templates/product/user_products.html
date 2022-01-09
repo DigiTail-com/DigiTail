@@ -3,7 +3,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>My products</title>
-    <link  media="all" rel="stylesheet" th:href="@{/public/css/show_products.css}">
+    <link  media="all" rel="stylesheet" th:href="@{/public/css/user_products_style.css}">
     <link media="all" type="text/css" rel="stylesheet" th:href="@{/public/css/mainHeaderFooter.css}"/>
     <meta charset="UTF-8">
 </head>
@@ -137,6 +137,8 @@
                 '#404040';
         });
     });
+    let productsLength = document.querySelector(".product").children.length;
+    document.querySelector(".categories").style.height = 320 + Math.ceil(productsLength/3)*260 + 'px';
 </script>
 </body>
 </html>
