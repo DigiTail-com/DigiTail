@@ -17,19 +17,26 @@
                     <a class="nav__link" th:href="@{/}">главная</a>
                     <a class="nav__link" th:href="@{/product/showProducts}">категории</a>
                     <a class="nav__link" href="#">поддержка</a>
-                    <a class="nav__img" th:href="@{/user}">
-                        <img th:src="@{/public/img/main_page/user2.png}" width="20" height="20">
-                    </a>
-                    <form style="display: inline-block" th:action="@{/logout}" method="post">
-                        <input type="submit" value="Sign Out" class="loginButton logOutButton" />
-                    </form>
+                    <div class="nav__img">
+                        <img th:src="@{/public/img/main_page/shopping-cart.png}" width="24" height="24">
+                    </div>
+                    <a class="nav__link2" href="#">343$</a>
+
+                    <div class="nav__img2">
+                        <ul class="topmenu">
+                            <li><a href="#"><img th:src="@{/public/img/main_page/user2.png}" width="24" height="24"></a>
+                                <ul class="submenu">
+                                    <li class="sub"><a th:href="@{/user}">Аккаунт</a></li>
+                                    <li class="sub2"><a th:action="@{/logout}">Выход</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
 
                 </nav>
             </div>
         </div>
     </header>
-
-
     <div class="categories">
         <div class="productAndFilter">
             <!--<div class="product">
