@@ -129,8 +129,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /*Header*/
 .header {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    height: 53.6px;
     width: 100%;
     background: black;
     background-color: rgba(0, 0, 0, 0.7);
@@ -148,23 +147,46 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 20px;
     font-weight: 400;
     color: #fff;
-    margin-left: 40px;
+    padding-left: 40px;
+    margin-bottom: 5px;
 }
 
+.header__logoNotLogedIn {
+    position: relative;
+    top: 8px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #fff;
+    padding-left: 40px;
+    margin-bottom: 5px;
+}
 
-/*Nav*/
 .nav {
+    display: flex;
+    vertical-align: top;
     font-size: 12px;
     font-weight: 400;
     text-transform: uppercase;
 }
 
-
 .nav__link {
     display: inline-block;
     vertical-align: top;
     margin: 0 15px;
-    margin-top: 6px;
+    margin-top: 15px;
+
+    color: #fff;
+    text-decoration: none;
+
+    transition: color 0.2s linear;
+}
+
+.nav__link2 {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 5px;
+    margin-top: 15px;
+    margin-right: 10px;
 
     color: #fff;
     text-decoration: none;
@@ -176,11 +198,116 @@ h1, h2, h3, h4, h5, h6 {
     display: inline-block;
     vertical-align: center;
     margin: 0 10px;
-    margin-top: 8px;
+    margin-top: 13px;
+    margin-right: 5px;
+}
+
+.nav__img2 {
+    display: inline-block;
+}
+
+.topmenu > li {
+    display: inline-block;
+    position: relative;
+}
+
+.topmenu > li > a:before {
+    content: "";
+    position: absolute;
+    z-index: 5;
+    left: 50%;
+    top: 100%;
+    width: 10px;
+    height: 10px;
+    margin-bottom: 15px;
+    background: white;
+    border-radius: 50%;
+    transform: translate(-50%, 20px);
+    opacity: 0;
+    transition: .3s;
+}
+
+.topmenu li:hover a:before {
+    transform: translate(-50%, 0);
+    opacity: 1;
+}
+
+.topmenu > li:hover .submenu {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+.submenu {
+    position: absolute;
+    list-style-type: none;
+    z-index: 4;
+    left: 50%;
+    top: 100%;
+    width: 150px;
+    padding: 15px 15px 15px;
+    margin-top: 5px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, .2);
+    box-sizing: border-box;
+    visibility: hidden;
+    opacity: 0;
+    transform: translate(-50%, 20px);
+    transition: .3s;
+}
+
+.submenu a {
+    text-decoration: none;
+    font-size: 11px;
+    color: black;
+    letter-spacing: 1px;
+
+    transition: .2s linear;
+}
+
+.submenu a:hover {
+    background: #e8e8e8;
 }
 
 .nav__link:hover {
     color: #fce38a;
+}
+
+.sub:before {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 1px;
+    margin-bottom: 5px;
+
+    background-color: #DEDEDE;
+}
+
+.sub:after {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 1px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+    background-color: #DEDEDE;
+}
+
+.sub2:after {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 1px;
+    margin-top: 5px;
+
+    background-color: #DEDEDE;
+}
+
+.regLogButtons {
+    position: relative;
+    top: 8px;
 }
 
 .logOutButton {
