@@ -741,6 +741,14 @@ h1, h2, h3, h4, h5, h6 {
 
 /*Footer*/
 
+.container__foot {
+    letter-spacing: 0.3em;
+    font-size: 15px;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
 .section3 {
     padding-top: 15px;
     padding-bottom: 30px;
@@ -793,12 +801,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .foot4 {
     padding-top: 5px;
-    margin-left: 45px;
+    margin-left: 55px;
 }
 
 .foot5 {
     padding-top: 5px;
-    margin-left: 125px;
+    margin-left: 129px;
 }
 
 
@@ -846,4 +854,3 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 20px;
     margin-top: 20px;
 }
-
