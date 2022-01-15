@@ -45,6 +45,10 @@ public class BasketServiceImpl implements IService<BasketGoods> {
         basketRepository.saveAndFlush(basketGood);
     }
 
+    public Set<BasketGoods> findAllBasketGoodsByUser(User user){
+        return (Set<BasketGoods>) basketRepository.findAllByUser(user);
+    }
+
     @Override
     public Collection<BasketGoods> findAll() {
         return null;
