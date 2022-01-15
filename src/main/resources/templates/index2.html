@@ -53,10 +53,10 @@
 
                 <span class="regLogButtons" th:unless="${flag}">
                     <button id="login" class="loginButton leftButton" role="button">
-                        <span class="text">Login</span>
+                        <span class="text">Вход</span>
                     </button>
                     <button id="register" class="loginButton rightButton" role="button">
-                        <span class="text">Register</span>
+                        <span class="text">Регистрация</span>
                     </button>
                 </span>
 
@@ -110,14 +110,14 @@
     <div class="row">
         <img th:src="@{/public/img/login_registry/welcome.png}"/>
     </div>
-    <h2>Зарегестрироваться</h2>
+    <h2>Зарегистрироваться</h2>
     <form method="post" th:action="@{/registration}" th:object="${user}">
         <div style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"/>
         <div class="user-box">
             <input type="text" name="username" required="" th:field="*{username}"/>
             <label>
                 <i class="fa fa-user" aria-hidden="true"></i>
-                Login
+                Логин
             </label>
         </div>
 
@@ -140,7 +140,7 @@
         </div>
 
         <span class="myClass">
-                  <button type="submit" class="formButton">BUTTON</button>
+                  <button type="submit" class="formButton">Зарегистрироваться</button>
               </span>
     </form>
 </div>

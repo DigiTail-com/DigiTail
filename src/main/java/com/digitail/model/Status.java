@@ -4,7 +4,7 @@ public enum Status {
     APPROVED("Одобрено"),
     NOT_APPROVED("Не одобрено"),
     AWAITING("В ожидании"),
-    DEFAULT("Default");
+    DEFAULT("По умолчанию");
 
     private String status;
 

@@ -1,7 +1,7 @@
 package com.digitail.model;
 
 public enum Category {
-    PICTURE_COLOR("pictureColor");
+    PICTURE_COLOR("изображения");
 
     private String category;
 
