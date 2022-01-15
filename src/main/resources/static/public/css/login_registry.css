@@ -104,6 +104,10 @@
     transition: transform .25s;
 }
 
+.myClass .formRegButton {
+    width: 250px;
+}
+
 .myClass .formButton:before,
 .myClass .formButton:after {
     height: 45px;
@@ -115,6 +119,11 @@
     border-radius: 5px;
 }
 
+.myClass .formRegButton:before,
+.myClass .formRegButton:after {
+    width: 177px;
+}
+
 .myClass .formButton:after {
     position: absolute;
     content: "ВОЙТИ";
@@ -123,6 +132,10 @@
     transform: rotateX(90deg) translateZ(25px);
     border: 2px solid white;
     background: #fff;
+}
+
+.myClass .formRegButton:after {
+    content: "ЗАРЕГИСТРИРОВАТЬСЯ";
 }
 
 .myClass .formButton:hover {
