@@ -29,7 +29,12 @@
                         <li><a href="#"><img th:src="@{/public/img/main_page/user2.png}" width="24" height="24"></a>
                             <ul class="submenu">
                                 <li class="sub"><a th:href="@{/user}">Аккаунт</a></li>
-                                <li class="sub2"><a th:action="@{/logout}">Выход</a></li>
+                                <li class="sub2">
+                                    <form style="display: inline-block" th:action="@{/logout}" method="post">
+                                        <input type="submit" value="ВЫХОД"/>
+                                    </form>
+                                    <!--                                    <a th:action="@{/logout}">Выход</a>-->
+                                </li>
                             </ul>
                         </li>
                     </ul>
