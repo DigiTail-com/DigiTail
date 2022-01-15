@@ -14,7 +14,7 @@ public class BasketGoods {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, optional=true)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, optional=true)
     private User user;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, optional=true)

@@ -41,6 +41,10 @@ public class BasketServiceImpl implements IService<BasketGoods> {
         return products;
     }
 
+    public void save (BasketGoods basketGood){
+        basketRepository.saveAndFlush(basketGood);
+    }
+
     @Override
     public Collection<BasketGoods> findAll() {
         return null;

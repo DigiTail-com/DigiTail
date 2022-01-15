@@ -28,6 +28,8 @@ public class CardController {
     public String addCard(@AuthenticationPrincipal User user,
                           Model model){
 
+        model.addAttribute("user", user);
+
         if (user.getCard() == null)
             model.addAttribute("card", new Card());
         else

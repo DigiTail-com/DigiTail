@@ -35,7 +35,7 @@ public class User implements UserDetails {
 
     private boolean active;
 
-    private Float money;
+    private Float money = 0.0f;
 
     @Email(message = "Email should be valid")
     private String email;
@@ -51,10 +51,10 @@ public class User implements UserDetails {
     @OneToMany(mappedBy="user", fetch = FetchType.EAGER)
     private Set<Product> products;
 
-    @OneToOne(mappedBy="user", fetch = FetchType.EAGER)
-    private BasketGoods basketGoods;
+    @OneToMany(mappedBy="user", fetch = FetchType.EAGER)
+    private Set<BasketGoods> basketGoods;
 
-    private Float basketCosts;
+    private Float basketCosts = 0.0f;
 
     public void addProduct(Product product){
         products.add(product);

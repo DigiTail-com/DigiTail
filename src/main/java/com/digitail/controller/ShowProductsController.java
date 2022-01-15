@@ -1,11 +1,13 @@
 package com.digitail.controller;
 
 import com.digitail.changeColor.PictureService;
+import com.digitail.model.BasketGoods;
 import com.digitail.model.Category;
 import com.digitail.model.Status;
 import com.digitail.model.User;
 import com.digitail.repos.ProductRepository;
 import com.digitail.repos.UserRepository;
+import com.digitail.service.impl.BasketServiceImpl;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,6 +40,8 @@ public class ShowProductsController {
 
     private PictureService pictureService;
 
+    private BasketServiceImpl basketService;
+
     @Value("${upload.path}")
     private String uploadPath;
 
@@ -48,10 +52,14 @@ public class ShowProductsController {
     private String pictureColorLayersPath;
 
     @Autowired
-    public ShowProductsController(ProductRepository productRepository, UserRepository userRepository, PictureService picture) {
+    public ShowProductsController(ProductRepository productRepository
+            , UserRepository userRepository
+            , PictureService picture
+            , BasketServiceImpl basketService) {
         this.productRepository = productRepository;
         this.userRepository = userRepository;
         this.pictureService = picture;
+        this.basketService = basketService;
     }
 
     @GetMapping("/showProducts")
@@ -60,17 +68,22 @@ public class ShowProductsController {
             return "redirect:/";
         var products = productRepository.findAllByCategoryEqualsAndStatusEquals(Category.PICTURE_COLOR, Status.APPROVED);
 
+        model.addAttribute("user", user);
         model.addAttribute("products", products);
         model.addAttribute("flag", Category.PICTURE_COLOR.name());
         return "product/show_products";
     }
 
     @PostMapping("/showProducts")
-    public String sortingProducts(@Valid String category, Model model){
+    public String sortingProducts(@Valid String category
+            , @AuthenticationPrincipal User user
+            , Model model){
         var products = productRepository.findAllByCategoryEqualsAndStatusEquals(Category.valueOf(category), Status.APPROVED);
 
         model.addAttribute("flag", category);
         model.addAttribute("products", products);
+        model.addAttribute("user", user);
+
         return "product/show_products";
     }
 
@@ -79,6 +92,7 @@ public class ShowProductsController {
         if (user == null)
             return "redirect:/";
 
+        model.addAttribute("user", user);
         model.addAttribute("product", productRepository.findById(id));
         return "product/product_page";
     }
@@ -100,6 +114,26 @@ public class ShowProductsController {
                 .contentLength(file.length())
                 .contentType(MediaType.IMAGE_PNG).body(resources);
         return responseEntity;
+    }
+
+    @GetMapping("/addToBasket/{id}")
+    public String addProductToBasket(@PathVariable("id") long id,
+                                     @AuthenticationPrincipal User user){
+        var product = productRepository.findById(id);
+        var basketGood = new BasketGoods();
+
+        basketGood.setProduct(product);
+        basketGood.setUser(user);
+
+        var basketGoods = user.getBasketGoods();
+        basketGoods.add(basketGood);
+
+        basketService.save(basketGood);
+
+        user.setBasketCosts(basketService.findSum(user));
+        user.setBasketGoods(basketGoods);
+        userRepository.saveAndFlush(user);
+        return "redirect:/product/showProducts/" + id;
     }
 
     @GetMapping("/download")

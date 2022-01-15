@@ -2,10 +2,12 @@ package com.digitail.controller;
 
 import com.digitail.model.Product;
 import com.digitail.model.Status;
+import com.digitail.model.User;
 import com.digitail.repos.ProductRepository;
 import com.digitail.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -36,15 +38,21 @@ public class AdminController{
     }
 
     @GetMapping("/products")
-    public String allProducts(Model model){
+    public String allProducts(@AuthenticationPrincipal User user
+            , Model model){
         model.addAttribute("products", productRepository.findAll());
         model.addAttribute("flag", Status.DEFAULT.name());
+        model.addAttribute("user", user);
+
         return "admin/show_products_for_admin";
     }
 
     @GetMapping("/products/{id}")
-    public String showProduct(@PathVariable("id") long id, Model model){
+    public String showProduct(@PathVariable("id") long id
+            , @AuthenticationPrincipal User user
+            , Model model){
         model.addAttribute("product", productRepository.findById(id));
+        model.addAttribute("user", user);
         return "admin/admin_product_page";
     }
 
@@ -63,7 +71,9 @@ public class AdminController{
     }
 
     @PostMapping("/products")
-    public String sortingProducts(@Valid String status, Model model){
+    public String sortingProducts(@Valid String status
+            , @AuthenticationPrincipal User user
+            , Model model){
         var allProducts = productRepository.findAll();
         Set<Product> products = new HashSet<Product>();
 
@@ -78,6 +88,8 @@ public class AdminController{
         }
 
         model.addAttribute("flag", status);
+        model.addAttribute("user", user);
+
         return "admin/show_products_for_admin";
     }
 }

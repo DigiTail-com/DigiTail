@@ -54,6 +54,9 @@ public class personalAreaController {
 
     @GetMapping("/products")
     public String showUserProducts(@AuthenticationPrincipal User user, Model model){
+        if (user == null)
+            return "redirect:/";
+        model.addAttribute("user", user);
         var products = productRepository.findAllByUser(user);
         model.addAttribute("products", products);
         return "product/user_products";
@@ -61,6 +64,9 @@ public class personalAreaController {
 
     @GetMapping("/showProduct/{id}")
     public String showUserProduct(@PathVariable long id, @AuthenticationPrincipal User user, Model model){
+        if (user == null)
+            return "redirect:/";
+        model.addAttribute("user", user);
         model.addAttribute("product", productRepository.findById(id));
         return "product/user_product_page";
     }
@@ -84,6 +90,10 @@ public class personalAreaController {
     @GetMapping("/addMoney")
     public String addMoney(@AuthenticationPrincipal User user,
                            Model model){
+        if (user == null)
+            return "redirect:/";
+        model.addAttribute("user", user);
+
         try{
             if (errorModel.containsAttribute("incorrectCard"))
                 model.addAttribute("incorrectCard", true);

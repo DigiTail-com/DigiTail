@@ -57,7 +57,7 @@ public class AddProductController {
         if (user == null)
             return "redirect:/";
         model.addAttribute("product", new Product());
-//        model.addAttribute("user", user);
+        model.addAttribute("user", user);
 
         return "product/add_product";
     }
