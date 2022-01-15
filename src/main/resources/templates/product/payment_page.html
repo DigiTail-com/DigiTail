@@ -46,21 +46,21 @@
 </header>
 <div class="paymentPageMainDiv">
     <div class="paymentField">
-        <div class="paymentFieldInnerDiv">
+        <form class="paymentFieldInnerDiv" th:action="@{/card/addCard}" method="post" th:object="${card}" >
             <p class="paymentP1">Добавить способ оплаты</p>
             <p class="paymentP2">Кредитная или дебетовая карта</p>
-            <input class="nameSurnameCard" type="text" value="" placeholder="Имя и фамилия на карте">
+            <input class="nameSurnameCard" type="text" value="" placeholder="Имя и фамилия на карте" th:field="*{owner}">
             <br>
-            <input class="cardNumber" type="text" placeholder="Номер карты">
-            <input class="monthCard" type="text" placeholder="ММ">
-            <input class="yearCard" type="text" placeholder="ГГ">
+            <input class="cardNumber" type="text" placeholder="Номер карты" th:field="*{number}">
+            <input class="monthCard" type="text" placeholder="ММ" th:field="*{month}">
+            <input class="yearCard" type="text" placeholder="ГГ" th:field="*{year}">
             <br>
-            <input class="CVC" type="text" placeholder="CVC код">
+            <input class="CVC" type="text" placeholder="CVC код" th:field="*{cvv}">
             <span class="cardDateSpan">срок действия карты</span>
             <br>
             <p class="errorP">*Введены неверные данные</p>
-            <button class="continueButton" type="submit">Продолжить</button>
-        </div>
+            <input class="continueButton" type="submit" value="Продолжить">
+        </form>
     </div>
     <p><span class="plus"></span><span class="text">Добавить другой способ оплаты</span></span></p>
 </div>

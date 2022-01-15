@@ -54,6 +54,8 @@ public class User implements UserDetails {
     @OneToOne(mappedBy="user", fetch = FetchType.EAGER)
     private BasketGoods basketGoods;
 
+    private Float basketCosts;
+
     public void addProduct(Product product){
         products.add(product);
     }
