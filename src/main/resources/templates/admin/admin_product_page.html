@@ -5,6 +5,7 @@
     <title>productOneMorning</title>
     <link  media="all" rel="stylesheet" th:href="@{/public/css/product_page.css}">
     <link media="all" type="text/css" rel="stylesheet" th:href="@{/public/css/add_product_style.css}"/>
+    <link media="all" type="text/css" rel="stylesheet" th:href="@{/public/css/mainHeaderFooter.css}"/>
     <meta charset="UTF-8">
 </head>
 <body>
@@ -16,12 +17,26 @@
                 <a class="nav__link" th:href="@{/}">главная</a>
                 <a class="nav__link" th:href="@{/product/showProducts}">категории</a>
                 <a class="nav__link" href="#">поддержка</a>
-                <a class="nav__img" th:href="@{/user}">
-                    <img th:src="@{/public/img/main_page/user2.png}" width="20" height="20">
-                </a>
-                <form style="display: inline-block" th:action="@{/logout}" method="post">
-                    <input type="submit" value="Sign Out" class="loginButton logOutButton" />
-                </form>
+                <div class="nav__img">
+                    <img th:src="@{/public/img/main_page/shopping-cart.png}" width="24" height="24">
+                </div>
+                <a class="nav__link2" href="#">343$</a>
+
+                <div class="nav__img2">
+                    <ul class="topmenu">
+                        <li><a href="#"><img th:src="@{/public/img/main_page/user2.png}" width="24" height="24"></a>
+                            <ul class="submenu">
+                                <li class="sub"><a th:href="@{/user}">Аккаунт</a></li>
+                                <li class="sub2">
+                                    <form style="display: inline-block" th:action="@{/logout}" method="post">
+                                        <input type="submit" value="ВЫХОД"/>
+                                    </form>
+                                    <!--                                    <a th:action="@{/logout}">Выход</a>-->
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
 
             </nav>
         </div>
@@ -40,8 +55,10 @@
 </div>
 <div class="productOneMorning">
     <div class="mainProduct">
-        <img th:src="${product.getPath()}" class="mainProdImg">
-        <div class="mainProdInfo" style="max-width: 400px;">
+        <div class="mainProdImageDiv">
+            <img th:src="${product.getPath()}" class="mainProdImg">
+        </div>
+        <div class="mainProdInfo">
             <div class="mainProdInfoDiv">
                 <h1 >"Morning"<span>by Roves</span></h1>
                 <h1 style="color: yellow" th:text="${product.getStatus().getCommand()}"></h1>
@@ -53,7 +70,7 @@
                 </ul>
             </div>
             <form class="mainProdInfoButtonDiv" method="get" th:action="@{/product/download/{id}(id = ${product.getId()})}">
-                <button class="mainProdButton" type="submit" th:text="${product.getPrice() + '$'}" >
+                <button class="mainProdButton" type="submit" style="margin-top: 36px !important;" th:text="${product.getPrice() + '$'}" >
                 </button>
             </form>
         </div>
@@ -84,6 +101,7 @@
             <p class="menuDivP" >Редактирование товара</p>
             <div class="menuDivFlexBox">
                 <div>
+                    <h4 class="chooseCategSign">Выберите категорию:</h4>
                     <div class="menuDivSelectDiv">
                         <label>
                             <select name="status" id="roles" th:field="*{category}">
@@ -92,7 +110,7 @@
                             </select>
                         </label>
                     </div>
-
+                    <h4 class="chooseCategSign">Статус товара:</h4>
                     <div class="menuDivSelectDiv">
                         <label>
                             <select name="status" id="status" th:field="*{status}">

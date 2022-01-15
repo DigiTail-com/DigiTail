@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>AccountReduct</title>
-    <link rel="stylesheet" href="Frame5Page.css">
+    <title>PaymentPage</title>
+    <link media="all" type="text/css" rel="stylesheet" th:href="@{/public/css/payment_page.css}"/>
+    <link media="all" type="text/css" rel="stylesheet" th:href="@{/public/css/mainHeaderFooter.css}"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
           rel="stylesheet">
-    <link media="all" type="text/css" rel="stylesheet" th:href="@{/public/css/add_product_style.css}"/>
-    <link media="all" type="text/css" rel="stylesheet" th:href="@{/public/css/mainHeaderFooter.css}"/>
     <meta charset="UTF-8">
 </head>
 <body>
@@ -46,58 +44,25 @@
         </div>
     </div>
 </header>
-<div class="topnav">
-    <a href="#">Арты</a>
-    <a href="#">3d-модели</a>
-    <a href="#">GameDev</a>
-    <a href="#">Темы</a>
-    <a href="#">Презентации</a>
-    <a href="#">Сайты</a>
-    <a href="#">Шаблоны</a>
-    <a href="#">Wordpress</a>
-    <a href="#">Скрипты</a>
-</div>
-<div class="mainDiv">
-    <form class="menuDiv" method="post" th:action="@{/product/addProduct}" enctype="multipart/form-data"
-          th:object="${product}">
-        <p class="menuDivP">Добавление товара на торговую площадку</p>
-        <div class="menuDivFlexBox">
-            <div>
-                <h4 class="chooseCategSign">Выберите категорию:</h4>
-                <div class="menuDivSelectDiv">
-                    <label>
-                        <select name="status" id="roles" th:field="*{category}">
-                            <option th:each="category : ${T(com.digitail.model.Category).values()}"
-                                    th:value="${category}" th:text="${category.getCommand()}"></option>
-                        </select>
-                    </label>
-                </div>
-                <div class="menuDivPriceDiv">
-                    <input type="text" placeholder="ваша цена..." th:field="*{price}"/>
-                    <input type="text" placeholder="итоговая цена..."/>
-                    <span class="underSpanPrice">*с учётом комиссии</span>
-                </div>
-                <label class="custom-file-upload">
-                    <input type="file" name="file" class="form-control-file" multiple>
-                    Добавить файл
-                </label>
-            </div>
-            <div>
-                <div class="enterTitleDiv"><textarea type="text" placeholder="Введите название..."
-                                                     th:field="*{name}"></textarea></div>
-                <div class="enterDescriptionDiv"><textarea type="text" placeholder="Описание товара..."
-                                                           th:field="*{description}"></textarea>
-                </div>
-                <div class="addPhotoDiv">
-                    <input type="button" value="добавьте фото">
-                    <span class="plus"></span>
-                </div>
-            </div>
+<div class="paymentPageMainDiv">
+    <div class="paymentField">
+        <div class="paymentFieldInnerDiv">
+            <p class="paymentP1">Добавить способ оплаты</p>
+            <p class="paymentP2">Кредитная или дебетовая карта</p>
+            <input class="nameSurnameCard" type="text" value="" placeholder="Имя и фамилия на карте">
+            <br>
+            <input class="cardNumber" type="text" placeholder="Номер карты">
+            <input class="monthCard" type="text" placeholder="ММ">
+            <input class="yearCard" type="text" placeholder="ГГ">
+            <br>
+            <input class="CVC" type="text" placeholder="CVC код">
+            <span class="cardDateSpan">срок действия карты</span>
+            <br>
+            <p class="errorP">*Введены неверные данные</p>
+            <button class="continueButton" type="submit">Продолжить</button>
         </div>
-        <div class="saveButtonDiv">
-            <input type="submit" value="Сохранить">
-        </div>
-    </form>
+    </div>
+    <p><span class="plus"></span><span class="text">Добавить другой способ оплаты</span></span></p>
 </div>
 
 <section class="section3">
@@ -168,6 +133,14 @@
         </div>
         <div class="digi">C DigiTail, 2022г</div>
     </div>
+
+</section>
+
+<section class="section__bottom">
+    <div class="container">
+
+    </div>
+
 
 </section>
 <script>

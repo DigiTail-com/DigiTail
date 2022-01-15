@@ -1,383 +1,420 @@
 <!DOCTYPE HTML>
 <html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-  <head>
+<head>
     <meta charset="UTF-8">
-      <link media="all" rel="stylesheet" th:href="@{/public/css/main_page.css}"/>
-      <link media="screen" type="text/css" rel="stylesheet" th:href="@{/public/css/login_registry.css}"/>
-      <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link media="all" rel="stylesheet" th:href="@{/public/css/main_page.css}"/>
+    <link media="screen" type="text/css" rel="stylesheet" th:href="@{/public/css/login_registry.css}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
-      
-      <title>DigiTail</title>
-      </head>
-  <body>
-      
-      
-      <header class="header">
-      <div class="container">
-          <div class="header__inner">
-          <div class="header__logo"><span class="letter">D</span>igi<span class="letter">T</span>ail</div>
-              <nav class="nav">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <title>DigiTail</title>
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <div class="header__inner">
+            <div class="header__logo" th:if="${flag}"><span class="letter">D</span>igi<span class="letter">T</span>ail</div>
+            <div class="header__logoNotLogedIn" th:unless="${flag}"><span class="letter">D</span>igi<span class="letter">T</span>ail</div>
+            <nav class="nav">
                 <a class="nav__link" th:href="@{/}">главная</a>
                 <a class="nav__link" th:href="@{/product/showProducts}">категории</a>
                 <a class="nav__link" href="#">поддержка</a>
 
-                <a class="nav__img" th:if="${flag}" th:href="@{/user}">
-                    <img th:src="@{/public/img/main_page/user2.png}" width="20" height="20">
-                </a>
+                <div th:if="${flag}" class="nav__img">
+                    <img th:src="@{/public/img/main_page/shopping-cart.png}" width="24" height="24">
+                </div>
 
-              <span class="regLogButtons">
-                      <button th:unless="${flag}" id="login" class="loginButton leftButton" role="button"><span class="text">Login</span></button>
-                      <button th:unless="${flag}" id="register" class="loginButton rightButton" role="button"><span class="text">Register</span></button>
-                  </span>
+                <a th:if="${flag}" class="nav__link2" href="#">343$</a>
 
-              <form style="display: inline-block" th:action="@{/logout}" method="post" th:if="${flag}">
-                  <input type="submit" value="Sign Out" class="loginButton logOutButton" />
-              </form>
-                  
-              </nav>
-          </div>
-          </div>
-      </header>
+                <div th:if="${flag}" class="nav__img2">
+                    <ul class="topmenu">
+                        <li>
+                            <a href="#">
+                                <img th:src="@{/public/img/main_page/user2.png}" width="24" height="24">
+                            </a>
 
-      <div class="login-box">
-          <a class="close" id="closeForm"></a>
-          <div class="row">
-              <img th:src="@{/public/img/login_registry/avatar.png}"/>
-          </div>
-          <h2>Войти</h2>
-          <form th:action="@{/login}" method="post">
-              <div class="user-box">
-                  <input type="text" name="username" required=""/>
-                  <label>
-                      <i class="fa fa-user" aria-hidden="true"></i>
-                      Логин
-                  </label>
-              </div>
-              <div class="user-box">
-                  <input type="password" name="password" required=""/>
-                  <label>
-                      <i class="fa fa-unlock" aria-hidden="true"></i>
-                      Пароль
-                  </label>
-              </div>
-              <span class="myClass"><button type="submit" class="formButton">ВОЙТИ</button></span>
-          </form>
-      </div>
+                            <ul class="submenu">
+                                <li class="sub">
+                                    <a th:href="@{/user}">Аккаунт</a>
+                                </li>
+                                <li class="sub2">
+                                    <form style="display: inline-block" th:action="@{/logout}" method="post">
+                                        <input type="submit" value="ВЫХОД"/>
+                                    </form>
+<!--                                    <a th:action="@{/logout}">Выход</a>-->
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
 
-      <div class="reg-box">
-          <a  class="close" id="closeRegForm"></a>
-          <div class="row">
-              <img th:src="@{/public/img/login_registry/welcome.png}"/>
-          </div>
-          <h2>Зарегестрироваться</h2>
-          <form method="post" th:action="@{/registration}" th:object="${user}">
-              <div style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"/>
-              <div class="user-box">
-                  <input type="text" name="username" required="" th:field="*{username}"/>
-                  <label>
-                      <i class="fa fa-user" aria-hidden="true"></i>
-                      Login
-                  </label>
-              </div>
+                <span class="regLogButtons" th:unless="${flag}">
+                    <button id="login" class="loginButton leftButton" role="button">
+                        <span class="text">Login</span>
+                    </button>
+                    <button id="register" class="loginButton rightButton" role="button">
+                        <span class="text">Register</span>
+                    </button>
+                </span>
 
-              <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"/>
-              <div class="user-box">
-                  <input type="text" name="" required="" th:field="*{email}"/>
-                  <label>
-                      <i class="fa fa-user" aria-hidden="true"></i>
-                      Email
-                  </label>
-              </div>
+            </nav>
+        </div>
+    </div>
+</header>
+<!--
+<a class="nav__img" th:if="${flag}" th:href="@{/user}">
+              <img th:src="@{/public/img/main_page/user2.png}" width="20" height="20">
+          </a>
 
-              <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"/>
-              <div class="user-box">
-                  <input type="password" name="password" required="" th:field="*{password}"/>
-                  <label>
-                      <i class="fa fa-unlock" aria-hidden="true"></i>
-                      Пароль
-                  </label>
-              </div>
+        <span class="regLogButtons">
+                <button th:unless="${flag}" id="login" class="loginButton leftButton" role="button"><span class="text">Login</span></button>
+                <button th:unless="${flag}" id="register" class="loginButton rightButton" role="button"><span class="text">Register</span></button>
+            </span>
 
-              <span class="myClass">
+        <form style="display: inline-block" th:action="@{/logout}" method="post" th:if="${flag}">
+            <input type="submit" value="Sign Out" class="loginButton logOutButton" />
+        </form>
+
+-->
+
+<div class="login-box">
+    <a class="close" id="closeForm"></a>
+    <div class="row">
+        <img th:src="@{/public/img/login_registry/avatar.png}"/>
+    </div>
+    <h2>Войти</h2>
+    <form th:action="@{/login}" method="post">
+        <div class="user-box">
+            <input type="text" name="username" required=""/>
+            <label>
+                <i class="fa fa-user" aria-hidden="true"></i>
+                Логин
+            </label>
+        </div>
+        <div class="user-box">
+            <input type="password" name="password" required=""/>
+            <label>
+                <i class="fa fa-unlock" aria-hidden="true"></i>
+                Пароль
+            </label>
+        </div>
+        <span class="myClass"><button type="submit" class="formButton">ВОЙТИ</button></span>
+    </form>
+</div>
+
+<div class="reg-box">
+    <a class="close" id="closeRegForm"></a>
+    <div class="row">
+        <img th:src="@{/public/img/login_registry/welcome.png}"/>
+    </div>
+    <h2>Зарегестрироваться</h2>
+    <form method="post" th:action="@{/registration}" th:object="${user}">
+        <div style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"/>
+        <div class="user-box">
+            <input type="text" name="username" required="" th:field="*{username}"/>
+            <label>
+                <i class="fa fa-user" aria-hidden="true"></i>
+                Login
+            </label>
+        </div>
+
+        <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"/>
+        <div class="user-box">
+            <input type="text" name="" required="" th:field="*{email}"/>
+            <label>
+                <i class="fa fa-user" aria-hidden="true"></i>
+                Email
+            </label>
+        </div>
+
+        <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"/>
+        <div class="user-box">
+            <input type="password" name="password" required="" th:field="*{password}"/>
+            <label>
+                <i class="fa fa-unlock" aria-hidden="true"></i>
+                Пароль
+            </label>
+        </div>
+
+        <span class="myClass">
                   <button type="submit" class="formButton">BUTTON</button>
               </span>
-          </form>
-      </div>
+    </form>
+</div>
 
 
-      <div class="intro">
+<div class="intro">
     <div class="container">
         <div class="intro__inner">
-        <div class="intro__title">Все, что нужно для  цифрового гения !</div>
-            <div class="intro__suptitle">Воплощай свои идеи или создавай новые с помощью торговой площадки </div>
-            
+            <div class="intro__title">Все, что нужно для цифрового гения !</div>
+            <div class="intro__suptitle">Воплощай свои идеи или создавай новые с помощью торговой площадки</div>
+
             <a class="button" href="#">Хочу!</a>
         </div>
-      </div>
-          </div>
-      
-      <section class="section">
-          <div class="container__shop">
-              
-            <div class="section__header">
-                <h1 class="section_title"><span class="letter">D</span>igi<span class="letter">T</span>ail</h1>
-            </div>
-              <div class="slider">
+    </div>
+</div>
+
+<section class="section">
+    <div class="container__shop">
+
+        <div class="section__header">
+            <h1 class="section_title"><span class="letter">D</span>igi<span class="letter">T</span>ail</h1>
+        </div>
+        <div class="slider">
             <div class="slider__item">Библиотека артов</div>
-            <div class="slider__item2">GameDev</div>  
+            <div class="slider__item2">GameDev</div>
             <div class="slider__item3">Темы для тебя</div>
         </div>
-              <div class="allshop">
-              <div class="shop1">
-                  <div class="mainitem__back">
-                  <div class="shop__mainitem">
-                      <div class="shop__img">
-                        <img th:src="@{/public/img/main_page/1.png}" width="490" height="270">
-                      </div>
-                        <div class="shop__text">Подробнее ></div>
-                    </div>
-                      </div>
-                  <div class="mainitem__back2">
-                  <div class="shop__mainitem">
-                      <div class="shop__img">
-                        <img th:src="@{/public/img/main_page/2.png}" width="490" height="270">
-                      </div>
-                        <div class="shop__text">Подробнее ></div>
-                    </div>
-                  </div>
-                  <div class="mainitem__back3">
-                  <div class="shop__mainitem">
-                      <div class="shop__img">
-                        <img th:src="@{/public/img/main_page/3.png}" width="490" height="270">
-                      </div>
-                        <div class="shop__text">Подробнее ></div>
-                  </div>
-                  </div>
-              </div>
-              
-              <div class="shop2">
-                  
-                  <div class="gap1">
-                  <div class="shop__item2">
-                      <div class="shop__img">
-                        <img th:src="@{/public/img/main_page/11.png}" width="230" height="135">
-                      </div>
-                        <div class="shop__text">Подробнее ></div>
-                </div>
-                  <div class="shop__item2">
-                      <div class="shop__img">
-                        <img th:src="@{/public/img/main_page/111.png}" width="230" height="135">
-                      </div>
-                        <div class="shop__text">Подробнее ></div>
-                      </div>
-                </div>
-                  
-                    <div class="gap2">
-                  <div class="shop__item2">
-                      <div class="shop__img">
-                        <img th:src="@{/public/img/main_page/22.png}" width="230" height="135">
-                      </div>
-                        <div class="shop__text">Подробнее ></div>
-                </div>
-                  <div class="shop__item2">
-                      <div class="shop__img">
-                        <img th:src="@{/public/img/main_page/222.png}" width="230" height="135">
-                      </div>
+        <div class="allshop">
+            <div class="shop1">
+                <div class="mainitem__back">
+                    <div class="shop__mainitem">
+                        <div class="shop__img">
+                            <img th:src="@{/public/img/main_page/1.png}" width="490" height="270">
+                        </div>
                         <div class="shop__text">Подробнее ></div>
                     </div>
                 </div>
-                  
-                  <div class="gap3">
-                  <div class="shop__item2">
-                      <div class="shop__img">
-                        <img th:src="@{/public/img/main_page/33.png}" width="230" height="135">
-                      </div>
+                <div class="mainitem__back2">
+                    <div class="shop__mainitem">
+                        <div class="shop__img">
+                            <img th:src="@{/public/img/main_page/2.png}" width="490" height="270">
+                        </div>
                         <div class="shop__text">Подробнее ></div>
+                    </div>
                 </div>
-                  <div class="shop__item2">
-                      <div class="shop__img">
-                        <img th:src="@{/public/img/main_page/333.png}" width="230" height="135">
-                      </div>
+                <div class="mainitem__back3">
+                    <div class="shop__mainitem">
+                        <div class="shop__img">
+                            <img th:src="@{/public/img/main_page/3.png}" width="490" height="270">
+                        </div>
                         <div class="shop__text">Подробнее ></div>
+                    </div>
                 </div>
-                      </div>
-              </div>
-                  </div>
-              
-              
-                   <div class="shop__text2">Покупай и продавай, стоит только начать !</div>
-          </div>
-      </section>
-      
-    <div class="statistics">
-      <div class="container">
-          
-          <div class="stat">
-              <div class="stat__item">
-                  <div class="stat__count">154000</div>
-                  <div class="stat__text">Проектов</div>
-              </div>
-              <div class="stat__item">
-                  <div class="stat__count">258000</div>
-                  <div class="stat__text">Пользователей</div>
-              </div>
-              <div class="stat__item">
-                  <div class="stat__count">5678324$</div>
-                  <div class="stat__text">Заработано пользователями</div>
-              </div>
-              <div class="stat__item">
-                  <div class="stat__count">2000</div>
-                  <div class="stat__text">Товаров каждый день</div>
-              </div>
-          </div>
+            </div>
+
+            <div class="shop2">
+
+                <div class="gap1">
+                    <div class="shop__item2">
+                        <div class="shop__img">
+                            <img th:src="@{/public/img/main_page/11.png}" width="230" height="135">
+                        </div>
+                        <div class="shop__text">Подробнее ></div>
+                    </div>
+                    <div class="shop__item2">
+                        <div class="shop__img">
+                            <img th:src="@{/public/img/main_page/111.png}" width="230" height="135">
+                        </div>
+                        <div class="shop__text">Подробнее ></div>
+                    </div>
+                </div>
+
+                <div class="gap2">
+                    <div class="shop__item2">
+                        <div class="shop__img">
+                            <img th:src="@{/public/img/main_page/22.png}" width="230" height="135">
+                        </div>
+                        <div class="shop__text">Подробнее ></div>
+                    </div>
+                    <div class="shop__item2">
+                        <div class="shop__img">
+                            <img th:src="@{/public/img/main_page/222.png}" width="230" height="135">
+                        </div>
+                        <div class="shop__text">Подробнее ></div>
+                    </div>
+                </div>
+
+                <div class="gap3">
+                    <div class="shop__item2">
+                        <div class="shop__img">
+                            <img th:src="@{/public/img/main_page/33.png}" width="230" height="135">
+                        </div>
+                        <div class="shop__text">Подробнее ></div>
+                    </div>
+                    <div class="shop__item2">
+                        <div class="shop__img">
+                            <img th:src="@{/public/img/main_page/333.png}" width="230" height="135">
+                        </div>
+                        <div class="shop__text">Подробнее ></div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      
-      <section class="section__about">
-          <div class="container__about">
-               <div class="section__header2">
-                  <h1 class="section_title">Торговая площадка</h1>
-               </div>
-                    <div class="section__header3">
-                        Сиcтема торговой площадки позволит тебе покупать и продавать  различный цифровой контент
-                    </div>
-              
-              <div class="about">
-                  <div class="about__block">
-                        <img class="shop__img2" th:src="@{/public/img/main_page/prs.png}" width="700" height="300">
-                      <div class="about__text">
-                         <div class="about__info">*Рекомендации, исходя из твоих предпочтений</div>
-                         <div class="about__info">*Рейтинг продавцов</div>
-                         <div class="about__info">*Только проверенные товары</div>
-                      </div>
-                    </div>
-              </div>
-              
-          </div>
-      </section>
-      
-      <section class="section2">
-          <div class="container__join">
-              <div class="join__header">
-                <h1 class="join__title">Создай учетную запись</h1>
-                  <div class="join__us">
-                    <div class="join__block">
-                        <img class="join__img" th:src="@{/public/img/main_page/user2.png}" width="190" height="190">
-                    </div>
-                      <a  th:unless="${flag}" id="register_two" class="button2" role="button"href="#">Создать</a>
-                      <div class="join__info">Получи возможность покупать и продавать цифровые товары прямо сейчас !</div>
-                  </div>
-              </div>
-          
-          </div>
-        
-            
-        
-      </section>
-      
-      <section class="section3">
-          <div class="container__foot">
-              <div class="foot__header">
-                <div class="foot__title">Категории товаров</div>
-                  <div class="foot__title">О DigiTail</div>
-                  <div class="foot__title">Учетная запись</div>
-                  <div class="foot__title">Помощь</div>
-              </div>
-              <div class="footeer">
-              <div class="mainfooter">
-              <div class="footer">
-              <div class="foot">
-                <div class="foot__info">Арты</div>
-                <div class="foot__info">3-d модели</div>
-                <div class="foot__info">GameDev</div>
-                <div class="foot__info">Темы</div>
-                <div class="foot__info">Презентации</div>
-                <div class="foot__info">Сайты</div>
-                <div class="foot__info">Wordpress</div>
-              </div>
-              
-              <div class="foot2">
-                <div class="foot__info">Скрипты</div>
-                <div class="foot__info">Приложения</div>
-                <div class="foot__info">Анимации</div>
-                <div class="foot__info">Музыка</div>
-                <div class="foot__info">Фото</div>
-                <div class="foot__info">Видео</div>
-                <div class="foot__info">Шаблоны</div>
-              </div>
-                                  
-                  <div class="footer2">
-              <div class="foot3">
-                <div class="foot__info">Инвесторы</div>
-                <div class="foot__info">Руководство</div>
-                <div class="foot__info">Контактная информация</div>
-                  
-                  <div class="foot__title">Сервисы</div>
-                <div class="foot__info">Торговая площадка</div>
-              </div>
-                  </div>
-                  
-              <div class="foot4">
-                <div class="foot__info">Аккаунт DigiTail</div>
-                <div class="foot__info">Условия учетной записи</div>
-              </div>
-                  
-            <div class="foot5">
-                <div class="foot__info">Арты</div>
-                <div class="foot__info">3-d модели</div>
-                <div class="foot__info">GameDev</div>
-                <div class="foot__info">Темы</div>
-                <div class="foot__info">Презентации</div>
-                <div class="foot__info">Сайты</div>
-                <div class="foot__info">Wordpress</div>
-              </div>
-              </div>
-                  </div>
-                  </div>
-              
-              <div class="foot__info2">
-                <div class="foot__info22">Условия использования</div>
-                <div class="foot__info22">Политика конфиденциальности</div>
-                <div class="foot__info22">Юридическая информация</div>
-                <div class="foot__info22">Использование cookies</div>
-              </div>
-                <div class="digi">C DigiTail, 2022г</div>
-          </div>
-      
-      </section>
-      
-      <section class="section__bottom">
-        <div class="container">
-            
-          </div>
-      
-      
-      
-      </section>
-      
-  </body>
 
-  <script>
-      document.querySelector("#login").onclick = () => {
-          document.querySelector(".login-box").style.display = "block";
-          document.querySelector(".reg-box").style.display = "none";
-      }
-      document.querySelector("#closeForm").onclick = () => {
-          document.querySelector(".login-box").style.display = "none";
-      };
-      document.querySelector("#register").onclick = () => {
-          document.querySelector(".reg-box").style.display = "block";
-          document.querySelector(".login-box").style.display = "none";
-      }
 
-      document.querySelector("#register_two").onclick = () => {
-          document.querySelector(".reg-box").style.display = "block";
-          document.querySelector(".login-box").style.display = "none";
-      }
-      document.querySelector("#closeRegForm").onclick = () => {
-          document.querySelector(".reg-box").style.display = "none";
-      };
-  </script>
+        <div class="shop__text2">Покупай и продавай, стоит только начать !</div>
+    </div>
+</section>
+
+<div class="statistics">
+    <div class="container">
+
+        <div class="stat">
+            <div class="stat__item">
+                <div class="stat__count">154000</div>
+                <div class="stat__text">Проектов</div>
+            </div>
+            <div class="stat__item">
+                <div class="stat__count">258000</div>
+                <div class="stat__text">Пользователей</div>
+            </div>
+            <div class="stat__item">
+                <div class="stat__count">5678324$</div>
+                <div class="stat__text">Заработано пользователями</div>
+            </div>
+            <div class="stat__item">
+                <div class="stat__count">2000</div>
+                <div class="stat__text">Товаров каждый день</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="section__about">
+    <div class="container__about">
+        <div class="section__header2">
+            <h1 class="section_title">Торговая площадка</h1>
+        </div>
+        <div class="section__header3">
+            Сиcтема торговой площадки позволит тебе покупать и продавать различный цифровой контент
+        </div>
+
+        <div class="about">
+            <div class="about__block">
+                <img class="shop__img2" th:src="@{/public/img/main_page/prs.png}" width="700" height="300">
+                <div class="about__text">
+                    <div class="about__info">*Рекомендации, исходя из твоих предпочтений</div>
+                    <div class="about__info">*Рейтинг продавцов</div>
+                    <div class="about__info">*Только проверенные товары</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="section2">
+    <div class="container__join">
+        <div class="join__header">
+            <h1 class="join__title">Создай учетную запись</h1>
+            <div class="join__us">
+                <div class="join__block">
+                    <img class="join__img" th:src="@{/public/img/main_page/user2.png}" width="190" height="190">
+                </div>
+                <a th:unless="${flag}" id="register_two" class="button2" role="button" href="#">Создать</a>
+                <div class="join__info">Получи возможность покупать и продавать цифровые товары прямо сейчас !</div>
+            </div>
+        </div>
+
+    </div>
+
+
+</section>
+
+<section class="section3">
+    <div class="container__foot">
+        <div class="foot__header">
+            <div class="foot__title">Категории товаров</div>
+            <div class="foot__title">О DigiTail</div>
+            <div class="foot__title">Учетная запись</div>
+            <div class="foot__title">Помощь</div>
+        </div>
+        <div class="footeer">
+            <div class="mainfooter">
+                <div class="footer">
+                    <div class="foot">
+                        <div class="foot__info">Арты</div>
+                        <div class="foot__info">3-d модели</div>
+                        <div class="foot__info">GameDev</div>
+                        <div class="foot__info">Темы</div>
+                        <div class="foot__info">Презентации</div>
+                        <div class="foot__info">Сайты</div>
+                        <div class="foot__info">Wordpress</div>
+                    </div>
+
+                    <div class="foot2">
+                        <div class="foot__info">Скрипты</div>
+                        <div class="foot__info">Приложения</div>
+                        <div class="foot__info">Анимации</div>
+                        <div class="foot__info">Музыка</div>
+                        <div class="foot__info">Фото</div>
+                        <div class="foot__info">Видео</div>
+                        <div class="foot__info">Шаблоны</div>
+                    </div>
+
+                    <div class="footer2">
+                        <div class="foot3">
+                            <div class="foot__info">Инвесторы</div>
+                            <div class="foot__info">Руководство</div>
+                            <div class="foot__info">Контактная информация</div>
+
+                            <div class="foot__title">Сервисы</div>
+                            <div class="foot__info">Торговая площадка</div>
+                        </div>
+                    </div>
+
+                    <div class="foot4">
+                        <div class="foot__info">Аккаунт DigiTail</div>
+                        <div class="foot__info">Условия учетной записи</div>
+                    </div>
+
+                    <div class="foot5">
+                        <div class="foot__info">Арты</div>
+                        <div class="foot__info">3-d модели</div>
+                        <div class="foot__info">GameDev</div>
+                        <div class="foot__info">Темы</div>
+                        <div class="foot__info">Презентации</div>
+                        <div class="foot__info">Сайты</div>
+                        <div class="foot__info">Wordpress</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="foot__info2">
+            <div class="foot__info22">Условия использования</div>
+            <div class="foot__info22">Политика конфиденциальности</div>
+            <div class="foot__info22">Юридическая информация</div>
+            <div class="foot__info22">Использование cookies</div>
+        </div>
+        <div class="digi">C DigiTail, 2022г</div>
+    </div>
+
+</section>
+
+<section class="section__bottom">
+    <div class="container">
+
+    </div>
+
+
+</section>
+
+</body>
+
+<script>
+    document.querySelector("#login").onclick = () => {
+        document.querySelector(".login-box").style.display = "block";
+        document.querySelector(".reg-box").style.display = "none";
+    }
+    document.querySelector("#closeForm").onclick = () => {
+        document.querySelector(".login-box").style.display = "none";
+    };
+    document.querySelector("#register").onclick = () => {
+        document.querySelector(".reg-box").style.display = "block";
+        document.querySelector(".login-box").style.display = "none";
+    }
+
+    document.querySelector("#register_two").onclick = () => {
+        document.querySelector(".reg-box").style.display = "block";
+        document.querySelector(".login-box").style.display = "none";
+    }
+    document.querySelector("#closeRegForm").onclick = () => {
+        document.querySelector(".reg-box").style.display = "none";
+    };
+</script>
 </html> 

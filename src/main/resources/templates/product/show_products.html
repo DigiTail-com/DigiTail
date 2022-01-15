@@ -4,6 +4,7 @@
 <head>
     <title>Categories</title>
     <link  media="all" rel="stylesheet" th:href="@{/public/css/show_products.css}">
+    <link  media="all" rel="stylesheet" th:href="@{/public/css/mainHeaderFooter.css}">
     <meta charset="UTF-8">
 </head>
 <body>
@@ -16,12 +17,26 @@
                     <a class="nav__link" th:href="@{/}">главная</a>
                     <a class="nav__link" th:href="@{/product/showProducts}">категории</a>
                     <a class="nav__link" href="#">поддержка</a>
-                    <a class="nav__img" th:href="@{/user}">
-                        <img th:src="@{/public/img/main_page/user2.png}" width="20" height="20">
-                    </a>
-                    <form style="display: inline-block" th:action="@{/logout}" method="post">
-                        <input type="submit" value="Sign Out" class="loginButton logOutButton" />
-                    </form>
+                    <div class="nav__img">
+                        <img th:src="@{/public/img/main_page/shopping-cart.png}" width="24" height="24">
+                    </div>
+                    <a class="nav__link2" href="#">343$</a>
+
+                    <div class="nav__img2">
+                        <ul class="topmenu">
+                            <li><a href="#"><img th:src="@{/public/img/main_page/user2.png}" width="24" height="24"></a>
+                                <ul class="submenu">
+                                    <li class="sub"><a th:href="@{/user}">Аккаунт</a></li>
+                                    <li class="sub2">
+                                        <form style="display: inline-block" th:action="@{/logout}" method="post">
+                                            <input type="submit" value="ВЫХОД"/>
+                                        </form>
+                                        <!--                                    <a th:action="@{/logout}">Выход</a>-->
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
 
                 </nav>
             </div>
@@ -143,6 +158,8 @@
                 '#404040';
         });
     });
+    let productsLength = document.querySelector(".product").children.length;
+    document.querySelector(".categories").style.height = 320 + Math.ceil(productsLength/3)*260 + 'px';
 </script>
 </body>
 </html>
