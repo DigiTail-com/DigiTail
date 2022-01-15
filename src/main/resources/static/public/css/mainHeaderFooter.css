@@ -129,11 +129,26 @@
     font-size: 11px;
     color: black;
     letter-spacing: 1px;
-
     transition: .2s linear;
 }
 
-.submenu a:hover {background: #e8e8e8;}
+.submenu input[type=submit] {
+    font-size: 11px;
+    color: black;
+    letter-spacing: 1px;
+    transition: .2s linear;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.submenu a:hover {
+    background: #e8e8e8;
+}
+
+.submenu input[type=submit]:hover {
+    background: #e8e8e8;
+}
 
 .nav__link:hover {
     color: #fce38a;
@@ -207,10 +222,6 @@
 }
 .rightButton {
     border-radius: 0 15px 15px 0;
-}
-.logOutButton {
-    border-radius: 15px;
-    top: -4px;
 }
 
 .loginButton:before {
