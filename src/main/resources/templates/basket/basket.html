@@ -1,0 +1,232 @@
+<!DOCTYPE HTML>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" th:href="@{/public/css/basket_style/basket.css}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
+              rel="stylesheet">
+
+        <title>Basket</title>
+    </head>
+    <body>
+
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <div class="header__logo"><span class="letter">D</span>igi<span class="letter">T</span>ail</div>
+                <nav class="nav">
+                    <a class="nav__link" href="#">главная</a>
+                    <a class="nav__link" href="#">категории</a>
+                    <a class="nav__link" href="#">поддержка</a>
+                    <div class="nav__img">
+                        <img th:src="@{/public/img/basket/shopping-cart.png}" width="24"
+                             height="24" alt="Картинка">
+                    </div>
+                    <a class="nav__link2" href="#">343$</a>
+
+                    <div class="nav__img2">
+                        <ul class="topmenu">
+                            <li>
+                                <a href="#">
+                                    <img th:src="@{/public/img/basket/user2.png}"
+                                                 width="24" height="24" alt="Картинка">
+                                </a>
+                                <ul class="submenu">
+                                    <li class="sub"><a href="#">Аккаунт</a></li>
+                                    <li class="sub2"><a href="#">Выход</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                </nav>
+            </div>
+        </div>
+    </header>
+
+
+    <section class="section__about">
+        <div class="container__about">
+            <div class="section__header2">
+                <div class="section_title">Ваша корзина</div>
+            </div>
+
+            <div class="about" th:each="product, iter : ${products} ">
+                <div class="about__block">
+                    <div class="img__info">
+                        <img class="shop__img2" th:src="${product.getPath()}" width="400" height="300" alt="Картинка">
+                    </div>
+
+                    <div class="about__text">
+                        <div class="inline__header">
+                            <div class="coloumn">
+                                <div class="about__header">
+                                    <div class="about__info" th:text="${product.getName()}">"Morning"</div>
+                                    <div class="about__infosub">by rooves</div>
+                                </div>
+
+                                <div class="about__info2">Описание:</div>
+                            </div>
+
+                            <div class="about__descript">
+                                <div class="descript__info">*Авторский арт</div>
+
+                            </div>
+
+                            <div class="buttons">
+                                <div class="button__set">
+                                    <a class="button" href="#" th:text="${product.getPrice()}">1,99$</a>
+                                </div>
+
+                                <div class="button__set2">
+                                    <a class="button2" href="#">удалить</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about">
+                <div class="about__block">
+                    <div class="clos__but">
+                        <div class="button__set3">
+                            <a class="button3" href="#">+</a>
+                        </div>
+
+                        <div class="total">
+                            <div class="button__set4">
+                                <a class="button4" href="#" th:text="${user.getBasketCosts()}">2,98$</a>
+                            </div>
+                            <div class="button__set5">
+                                <a class="button5" href="#zatemnenie">Оплатить</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="zatemnenie">
+                <div id="okno">
+                    Подтверждение покупки<br>
+
+                    <div class="acc_discript">
+                        <div class="acc__info">Список товаров:</div>
+                        <div class="acc__info2">"Morning" <span class="acc__disinfo2">by rooves</span></div>
+                        <div class="acc__info2">“Foggy” <span class="acc__disinfo2">от Abram</span></div>
+
+                        <div class="pay__info">Общая сумма</div>
+
+                        <div class="button__setpay">
+                            <a class="buttonpay" href="#">2,98$</a>
+                        </div>
+                    </div>
+
+                    <div class="payment">
+                        <div class="button__setpay2">
+                            <a class="buttonpay2" href="#">Оформить покупку</a>
+                            <div class="not__pay">*недостаточно средст для оплаты</div>
+                        </div>
+
+                        <div class="visa">
+                            <div class="visa__info"><span class="visatext">Visa</span> **** 9090</div>
+                            <div class="data">02/22</div>
+                            <div class="change">изменить способ оплаты</div>
+                        </div>
+
+                        <a href="#" class="close">Отмена</a>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <section class="section3">
+        <div class="container__foot">
+            <div class="foot__header">
+                <div class="foot__title">Категории товаров</div>
+                <div class="foot__title">О DigiTail</div>
+                <div class="foot__title">Учетная запись</div>
+                <div class="foot__title">Помощь</div>
+            </div>
+            <div class="footeer">
+                <div class="mainfooter">
+                    <div class="footer">
+                        <div class="foot">
+                            <div class="foot__info">Арты</div>
+                            <div class="foot__info">3-d модели</div>
+                            <div class="foot__info">GameDev</div>
+                            <div class="foot__info">Темы</div>
+                            <div class="foot__info">Презентации</div>
+                            <div class="foot__info">Сайты</div>
+                            <div class="foot__info">Wordpress</div>
+                        </div>
+
+                        <div class="foot2">
+                            <div class="foot__info">Скрипты</div>
+                            <div class="foot__info">Приложения</div>
+                            <div class="foot__info">Анимации</div>
+                            <div class="foot__info">Музыка</div>
+                            <div class="foot__info">Фото</div>
+                            <div class="foot__info">Видео</div>
+                            <div class="foot__info">Шаблоны</div>
+                        </div>
+
+                        <div class="footer2">
+                            <div class="foot3">
+                                <div class="foot__info">Инвесторы</div>
+                                <div class="foot__info">Руководство</div>
+                                <div class="foot__info">Контактная информация</div>
+
+                                <div class="foot__title">Сервисы</div>
+                                <div class="foot__info">Торговая площадка</div>
+                            </div>
+                        </div>
+
+                        <div class="foot4">
+                            <div class="foot__info">Аккаунт DigiTail</div>
+                            <div class="foot__info">Условия учетной записи</div>
+                        </div>
+
+                        <div class="foot5">
+                            <div class="foot__info">Арты</div>
+                            <div class="foot__info">3-d модели</div>
+                            <div class="foot__info">GameDev</div>
+                            <div class="foot__info">Темы</div>
+                            <div class="foot__info">Презентации</div>
+                            <div class="foot__info">Сайты</div>
+                            <div class="foot__info">Wordpress</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="foot__info2">
+                <div class="foot__info22">Условия использования</div>
+                <div class="foot__info22">Политика конфиденциальности</div>
+                <div class="foot__info22">Юридическая информация</div>
+                <div class="foot__info22">Использование cookies</div>
+            </div>
+            <div class="digi">C DigiTail, 2022г</div>
+        </div>
+
+    </section>
+
+    <section class="section__bottom">
+        <div class="container">
+
+        </div>
+
+
+    </section>
+
+    </body>
+</html> 

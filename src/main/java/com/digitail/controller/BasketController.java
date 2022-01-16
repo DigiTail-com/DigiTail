@@ -26,17 +26,18 @@ public class BasketController {
     }
 
     @GetMapping("")
-    public String basketShow(@AuthenticationPrincipal User user,
-                             Model model){
+    public String basketShow(@AuthenticationPrincipal User user
+            , Model model){
         var basketGoods = basketService.findAllProductsByUser(user);
         model.addAttribute("products", basketGoods);
         model.addAttribute("user", user);
         model.addAttribute("card", user.getCard());
-        return "redirect:/";
+        return "basket/basket";
     }
 
-    @DeleteMapping(value = "/delete/{id}")
-    public String basketDeleteProduct(@PathVariable Long id, @AuthenticationPrincipal User user){
+    @GetMapping(value = "/delete/{id}")
+    public String basketDeleteProduct(@PathVariable Long id
+            , @AuthenticationPrincipal User user){
 
         basketService.deleteById(id);
 

@@ -20,7 +20,7 @@
                 <div class="nav__img">
                     <img th:src="@{/public/img/main_page/shopping-cart.png}" width="24" height="24">
                 </div>
-                <a class="nav__link2" href="#" th:text="${user.basketCosts}">343$</a>
+                <a class="nav__link2" th:href="@{/basket}" th:text="${user.basketCosts}">343$</a>
 
                 <div class="nav__img2">
                     <ul class="topmenu">
