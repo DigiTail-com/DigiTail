@@ -5,43 +5,17 @@
     <title>My products</title>
     <link  media="all" rel="stylesheet" th:href="@{/public/css/user_products_style.css}">
     <link media="all" type="text/css" rel="stylesheet" th:href="@{/public/css/mainHeaderFooter.css}"/>
+
     <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
 </head>
 <body>
 <section class="mainSection">
-    <header class="header">
-        <div class="container">
-            <div class="header__inner">
-                <div class="header__logo"><span class="letter">D</span>igi<span class="letter">T</span>ail</div>
-                <nav class="nav">
-                    <a class="nav__link" th:href="@{/}">главная</a>
-                    <a class="nav__link" th:href="@{/product/showProducts}">категории</a>
-                    <a class="nav__link" href="#">поддержка</a>
-                    <div class="nav__img">
-                        <img th:src="@{/public/img/main_page/shopping-cart.png}" width="24" height="24">
-                    </div>
-                    <a class="nav__link2" th:href="@{/basket}" th:text="${user.basketCosts}">343$</a>
+    <div th:replace="fragments/header :: header"></div>
 
-                    <div class="nav__img2">
-                        <ul class="topmenu">
-                            <li><a href="#"><img th:src="@{/public/img/main_page/user2.png}" width="24" height="24"></a>
-                                <ul class="submenu">
-                                    <li class="sub"><a th:href="@{/user}">Аккаунт</a></li>
-                                    <li class="sub2">
-                                        <form style="display: inline-block" th:action="@{/logout}" method="post">
-                                            <input type="submit" value="ВЫХОД"/>
-                                        </form>
-                                        <!--                                    <a th:action="@{/logout}">Выход</a>-->
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-
-                </nav>
-            </div>
-        </div>
-    </header>
     <div class="categories">
         <div class="productAndFilter">
             <!--<div class="product">
@@ -71,76 +45,8 @@
 </section>
 
 
-<section class="section3">
-    <div class="container__foot">
-        <div class="foot__header">
-            <div class="foot__title">Категории товаров</div>
-            <div class="foot__title">О DigiTail</div>
-            <div class="foot__title">Учетная запись</div>
-            <div class="foot__title">Помощь</div>
-        </div>
-        <div class="footeer">
-            <div class="mainfooter">
-                <div class="footer">
-                    <div class="foot">
-                        <div class="foot__info">Арты</div>
-                        <div class="foot__info">3-d модели</div>
-                        <div class="foot__info">GameDev</div>
-                        <div class="foot__info">Темы</div>
-                        <div class="foot__info">Презентации</div>
-                        <div class="foot__info">Сайты</div>
-                        <div class="foot__info">Wordpress</div>
-                    </div>
+<div th:replace="fragments/header :: footer"></div>
 
-                    <div class="foot2">
-                        <div class="foot__info">Скрипты</div>
-                        <div class="foot__info">Приложения</div>
-                        <div class="foot__info">Анимации</div>
-                        <div class="foot__info">Музыка</div>
-                        <div class="foot__info">Фото</div>
-                        <div class="foot__info">Видео</div>
-                        <div class="foot__info">Шаблоны</div>
-                    </div>
-
-                    <div class="footer2">
-                        <div class="foot3">
-                            <div class="foot__info">Инвесторы</div>
-                            <div class="foot__info">Руководство</div>
-                            <div class="foot__info">Контактная информация</div>
-
-                            <div class="foot__title">Сервисы</div>
-                            <div class="foot__info">Торговая площадка</div>
-                        </div>
-                    </div>
-
-                    <div class="foot4">
-                        <div class="foot__info">Аккаунт DigiTail</div>
-                        <div class="foot__info">Условия учетной записи</div>
-                    </div>
-
-                    <div class="foot5">
-                        <div class="foot__info">Арты</div>
-                        <div class="foot__info">3-d модели</div>
-                        <div class="foot__info">GameDev</div>
-                        <div class="foot__info">Темы</div>
-                        <div class="foot__info">Презентации</div>
-                        <div class="foot__info">Сайты</div>
-                        <div class="foot__info">Wordpress</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="foot__info2">
-            <div class="foot__info22">Условия использования</div>
-            <div class="foot__info22">Политика конфиденциальности</div>
-            <div class="foot__info22">Юридическая информация</div>
-            <div class="foot__info22">Использование cookies</div>
-        </div>
-        <div class="digi">C DigiTail, 2022г</div>
-    </div>
-
-</section>
 <script>
     addEventListener('load', function () {
         addEventListener('scroll', function () {
