@@ -24,7 +24,7 @@
             <div class="about" th:each="product, iter : ${products} ">
                 <div class="about__block">
                     <div class="img__info">
-                        <img class="shop__img2" th:src="${product.getPath()}" width="400" height="300" alt="Картинка">
+                        <img class="shop__img2" th:src="${product.getPath()}"  alt="Картинка">
                     </div>
 
                     <div class="about__text">
@@ -38,10 +38,7 @@
                                 <div class="about__info2">Описание:</div>
                             </div>
 
-                            <div class="about__descript">
-                                <div class="descript__info">*Авторский арт</div>
 
-                            </div>
 
                             <div class="buttons">
                                 <div class="button__set">
@@ -126,6 +123,9 @@
                     '#404040';
             });
         });
+        let productsLength = document.querySelector(".container__about").children.length - 2;
+        document.querySelector(".container__about").style.height = 72 + productsLength*380 + 'px';
+        document.querySelector(".section__about").style.height = 100 + document.querySelector(".container__about").style.height + 'px';
     </script>
     </body>
 </html> 

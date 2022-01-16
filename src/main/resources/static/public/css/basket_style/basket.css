@@ -149,16 +149,21 @@ h1, h2, h3, h4, h5, h6 {
 
 .img__info {
     display: inline-flex;
+    position: relative;
+    margin-left: 600px;
 }
 
 .shop__img2 {
+    display: inline-block;
+    margin: auto;
+    max-width: 320px;
+    max-height: 180px;
     position: absolute;
-    margin-left: 600px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    left: 0;
-    top: 0;
-    height: auto;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(20%) translateX(-50%);
+    left: 50%;
+    z-index: 0;
 }
 
 /*Button*/
@@ -190,6 +195,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .buttons {
     display: table-column;
+    margin-left: 100px;
 }
 
 .button2 {
@@ -239,7 +245,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .button__set3 {
-    margin-left: 50px;
+    margin-left: 100px;
     padding-bottom: 40px;
 }
 
@@ -248,7 +254,7 @@ h1, h2, h3, h4, h5, h6 {
     padding: 15px 30px;
     background-color: #485E46;
     margin-bottom: 25px;
-    
+
     font-size: 20px;
     font-weight: 200;
     color: #fff;
@@ -265,7 +271,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .button__set4 {
-    margin-left: 600px;
+    margin-left: 400px;
     margin-top: 40px;
     padding-bottom: 40px;
 }
@@ -292,7 +298,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .button__set5 {
-    margin-left: 580px;
+    margin-left: 400px;
     padding-bottom: 40px;
 }
 
@@ -355,9 +361,168 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .inline__header {
-    display: inline-flex;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
 }
 
 .coloumn {
     display: table-column;
+}
+
+#zatemnenie {
+    background: rgba(102, 102, 102, 0.5);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
+#okno {
+    width: 900px;
+    height: 420px;
+    text-align: left;
+    padding: 15px;
+    color: #333334;
+    font-size: 30px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    background: #F4F4F4;
+}
+#zatemnenie:target {display: block;}
+.close {
+    display: inline-block;
+    color: #fff;
+    padding: 8px;
+    margin: 50px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    background: #CE2E2E;
+    font-size: 20px;
+    cursor:pointer;
+}
+.close:hover {background: #e6e6ff;}
+
+.acc_discript {
+    background: #DEDEDE;
+    margin-top: 10px;
+}
+
+.acc__info {
+    font-size: 25px;
+    padding-left: 10px;
+}
+
+.acc__info2 {
+    font-size: 25px;
+    padding-left: 15px;
+    padding-top: 10px;
+    font-weight: 500;
+}
+
+.acc__disinfo2 {
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.pay__info {
+    margin-left: 570px;
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.buttonpay {
+
+    padding: 15px 30px;
+    background-color: #485E46;
+    margin-bottom: 25px;
+
+    font-size: 15px;
+    font-weight: 400;
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 10px;
+
+    transition: background 0.1s linear, color 0.1s linear;
+}
+
+.buttonpay:hover {
+    background-color: #fff;
+    color: #485E46;
+}
+
+.button__setpay {
+    margin-left: 580px;
+    padding-bottom: 20px;
+}
+
+.buttonpay2 {
+
+    padding: 15px 30px;
+    background-color: #485E46;
+    margin-bottom: 25px;
+
+    font-size: 20px;
+    font-weight: 500;
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 10px;
+
+    transition: background 0.1s linear, color 0.1s linear;
+}
+
+.buttonpay2:hover {
+    background-color: #fff;
+    color: #485E46;
+}
+
+.button__setpay2 {
+    margin-left: 10px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.not__pay {
+    color: #BA1818;
+    font-size: 10px;
+    font-weight: 300;
+    padding-top: 9px;
+    padding-left: 5px;
+}
+
+.payment {
+    display: inline-flex;
+}
+
+.visatext {
+    font-weight: 800;
+    color: darkblue;
+}
+
+.data {
+    font-size: 15px;
+    padding-left: 10px;
+}
+
+.change {
+    font-size: 13px;
+    padding-left: 10px;
+    color: #B0B0B0;
+}
+
+.visa__info {
+    font-size: 15px;
+    padding-left: 10px;
+    padding-top: 15px;
+}
+
+.close {
+    margin-left: 80px;
 }
