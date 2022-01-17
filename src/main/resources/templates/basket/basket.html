@@ -21,18 +21,18 @@
                 <div class="section_title">Ваша корзина</div>
             </div>
 
-            <div class="about" th:each="product, iter : ${products} ">
+            <div class="about" th:each="good, iter : ${basket} ">
                 <div class="about__block">
                     <div class="img__info">
-                        <img class="shop__img2" th:src="${product.getPath()}"  alt="Картинка">
+                        <img class="shop__img2" th:src="${good.getProduct().getPath()}"  alt="Картинка">
                     </div>
 
                     <div class="about__text">
                         <div class="inline__header">
                             <div class="coloumn">
                                 <div class="about__header">
-                                    <div class="about__info" th:text="${product.getName()}">"Morning"</div>
-                                    <div class="about__infosub">by rooves</div>
+                                    <div class="about__info" th:text="${good.getProduct().getName()}">"Morning"</div>
+                                    <div class="about__infosub">by <span th:text="${good.getProduct().getUser().getUsername()}"></span></div>
                                 </div>
 
                                 <div class="about__info2">Описание:</div>
@@ -42,11 +42,11 @@
 
                             <div class="buttons">
                                 <div class="button__set">
-                                    <a class="button" href="#" th:text="${product.getPrice()}">1,99$</a>
+                                    <a class="button" th:href="@{/product/showProducts/{id}(id = ${good.getProduct().getId()})}" th:text="${good.getProduct().getPrice()}">1,99$</a>
                                 </div>
 
                                 <div class="button__set2">
-                                    <a class="button2" href="#">удалить</a>
+                                    <a class="button2" th:href="@{/basket/delete/{id}(id = ${good.getId()})}">удалить</a>
                                 </div>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                 <div class="about__block">
                     <div class="clos__but">
                         <div class="button__set3">
-                            <a class="button3" href="#">+</a>
+                            <a class="button3" th:href="@{/product/showProducts}">+</a>
                         </div>
 
                         <div class="total">
@@ -81,29 +81,33 @@
 
                     <div class="acc_discript">
                         <div class="acc__info">Список товаров:</div>
-                        <div class="acc__info2">"Morning" <span class="acc__disinfo2">by rooves</span></div>
-                        <div class="acc__info2">“Foggy” <span class="acc__disinfo2">от Abram</span></div>
+                        <div class="acc__info2" th:if="${basket.isEmpty()}" style="color: red">Корзина пуста</span></div>
+                        <div class="acc__info2" th:each="good, iter : ${basket} " th:if="${basket != null}"><span th:text="${good.getProduct().getName()}"></span> <span class="acc__disinfo2">by <span th:text="${good.getUser().getUsername()}"></span></span></div>
 
                         <div class="pay__info">Общая сумма</div>
 
                         <div class="button__setpay">
-                            <a class="buttonpay" href="#">2,98$</a>
+                            <a class="buttonpay" href="#" th:text="${user.getBasketCosts()}">2,98$</a>
                         </div>
                     </div>
 
                     <div class="payment">
                         <div class="button__setpay2">
-                            <a class="buttonpay2" href="#">Оформить покупку</a>
-                            <div class="not__pay">*недостаточно средст для оплаты</div>
+                            <a class="buttonpay2" th:href="@{/basket/download}">Оформить покупку</a>
+                            <div class="not__pay" th:if="${noMoney}">*недостаточно средств для оплаты</div>
+                            <div class="not__pay" th:if="${noCard}">*некорректные данные по карте</div>
+                            <div class="not__pay" th:if="${noGoods}">*корзина пуста</div>
                         </div>
 
                         <div class="visa">
-                            <div class="visa__info"><span class="visatext">Visa</span> **** 9090</div>
-                            <div class="data">02/22</div>
-                            <div class="change">изменить способ оплаты</div>
+                            <div class="visa__info" th:if="${card != null}"><span class="visatext">Visa</span> **** <span th:text="${card.getNumber() % 10000}"></span></div>
+                            <div class="data" th:if="${card != null}"><span th:text="${card.getMonth()}"></span>/<span th:text="${card.getYear()}"></span></div>
+                            <div class="change" th:if="${card == null}" style="color: red">У вас не привязана карта</div>
+                            <a class="change" th:href="@{/card}">изменить способ оплаты</a>
+
                         </div>
 
-                        <a href="#" class="close">Отмена</a>
+                        <a th:href="@{/basket}" class="close">Отмена</a>
 
                     </div>
 

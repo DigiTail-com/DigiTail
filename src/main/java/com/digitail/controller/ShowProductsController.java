@@ -126,13 +126,16 @@ public class ShowProductsController {
         basketGood.setUser(user);
 
         var basketGoods = user.getBasketGoods();
-        basketGoods.add(basketGood);
+        if (!basketService.userHaveGoodInBasket(user, product)){
+            basketGoods.add(basketGood);
+            basketService.save(basketGood);
 
-        basketService.save(basketGood);
+            user.setBasketCosts(basketService.findSum(user));
+            user.setBasketGoods(basketGoods);
+            userRepository.saveAndFlush(user);
+        }
 
-        user.setBasketCosts(basketService.findSum(user));
-        user.setBasketGoods(basketGoods);
-        userRepository.saveAndFlush(user);
+
         return "redirect:/product/showProducts/" + id;
     }
 

@@ -46,7 +46,23 @@ public class BasketServiceImpl implements IService<BasketGoods> {
     }
 
     public Set<BasketGoods> findAllBasketGoodsByUser(User user){
-        return (Set<BasketGoods>) basketRepository.findAllByUser(user);
+        return basketRepository.findAllByUser(user);
+    }
+
+    public boolean userHaveGoodInBasket(User user, Product product){
+        var basketGoods = basketRepository.findAllByUser(user);
+        for (var good:basketGoods) {
+            if (good.getProduct().getId() == product.getId())
+                return true;
+        }
+        return false;
+    }
+
+    public void deleteAllByUser(User user){
+        var basketGoods = findAllBasketGoodsByUser(user);
+        for (var good:basketGoods){
+            basketRepository.deleteById(good.getId());
+        }
     }
 
     @Override

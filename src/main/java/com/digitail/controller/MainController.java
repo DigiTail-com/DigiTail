@@ -1,5 +1,6 @@
 package com.digitail.controller;
 
+import com.digitail.config.WebSecurityConfig;
 import com.digitail.model.Role;
 import com.digitail.model.User;
 import com.digitail.repos.UserRepository;
@@ -22,18 +23,21 @@ import java.util.Collections;
 @RequestMapping("/")
 public class MainController {
 
-
     private UserRepository userRepository;
     private UserServiceImpl userServiceImpl;
     private BasketServiceImpl basketService;
+    private WebSecurityConfig config;
+
 
     @Autowired
     public MainController(UserRepository userRepository,
                           UserServiceImpl userServiceImpl,
-                          BasketServiceImpl basketService) {
+                          BasketServiceImpl basketService,
+                          WebSecurityConfig config) {
         this.userRepository = userRepository;
         this.userServiceImpl = userServiceImpl;
         this.basketService = basketService;
+        this.config = config;
     }
 
     @GetMapping()
@@ -67,6 +71,7 @@ public class MainController {
             user.setRoles(Collections.singleton(Role.ADMIN));
         else user.setRoles(Collections.singleton(Role.USER));
         user.setMoney(0.0f);
+        user.setPassword(config.getPasswordEncoder().encode(user.getPassword()));
         userRepository.save(user);
 
         return "redirect:/";
